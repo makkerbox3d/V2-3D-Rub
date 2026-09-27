@@ -1,28 +1,31 @@
 /* =====================================
    MakkerBox 3D OS
 
-   APP CONTROLLER V2
+   APP CONTROLLER V3
 
 ===================================== */
 
 
 
 // =====================================
-// NAVEGAÇÃO ENTRE TELAS
+// ABRIR TELAS
 // =====================================
 
 
 function mostrarTela(tela){
 
 
-    let telas = document.querySelectorAll(".tela");
+
+    let telas = document.querySelectorAll(
+        ".tela"
+    );
 
 
 
-    telas.forEach(function(item){
+    telas.forEach(function(secao){
 
 
-        item.classList.add(
+        secao.classList.add(
             "escondida"
         );
 
@@ -32,7 +35,7 @@ function mostrarTela(tela){
 
 
 
-    let abrir =
+    let abrir = 
     document.getElementById(tela);
 
 
@@ -55,6 +58,8 @@ function mostrarTela(tela){
 
 
 
+
+
 // =====================================
 // CARREGAR EMPRESA
 // =====================================
@@ -69,7 +74,6 @@ function carregarEmpresa(){
         return;
 
     }
-
 
 
 
@@ -93,10 +97,10 @@ function carregarEmpresa(){
 
 
 
-    // COR PRINCIPAL
+    if(
+    banco.empresa.corPrincipal
+    ){
 
-
-    if(banco.empresa.corPrincipal){
 
 
         document.documentElement
@@ -114,10 +118,12 @@ function carregarEmpresa(){
 
 
 
-    // LOGO
 
 
-    if(banco.empresa.logo){
+
+    if(
+    banco.empresa.logo
+    ){
 
 
 
@@ -155,8 +161,9 @@ function carregarEmpresa(){
 
 
 
+
 // =====================================
-// SALVAR CONFIGURAÇÃO EMPRESA
+// SALVAR EMPRESA
 // =====================================
 
 
@@ -172,11 +179,14 @@ function salvarEmpresa(){
 
 
 
+
+
     let cor =
 
     document.getElementById(
         "novaCor"
     ).value;
+
 
 
 
@@ -194,6 +204,8 @@ function salvarEmpresa(){
 
 
 
+
+
     if(cor){
 
 
@@ -207,11 +219,14 @@ function salvarEmpresa(){
 
 
 
+
+
     salvarBanco();
 
 
 
     carregarEmpresa();
+
 
 
 
@@ -230,6 +245,7 @@ function salvarEmpresa(){
 
 
 
+
 // =====================================
 // ATUALIZAR DASHBOARD
 // =====================================
@@ -239,10 +255,10 @@ function atualizarDashboard(){
 
 
 
-    // IMPRESSORAS
+    // Impressoras
 
 
-    let totalImp =
+    let impressoras =
 
     document.getElementById(
         "totalImpressoras"
@@ -250,10 +266,10 @@ function atualizarDashboard(){
 
 
 
-    if(totalImp){
+    if(impressoras){
 
 
-        totalImp.innerHTML =
+        impressoras.innerHTML =
 
         banco.impressoras.length;
 
@@ -264,11 +280,11 @@ function atualizarDashboard(){
 
 
 
-    // ESTOQUE
+
+    // Estoque
 
 
-
-    let totalEstoque =
+    let estoque =
 
     document.getElementById(
         "totalEstoque"
@@ -276,12 +292,38 @@ function atualizarDashboard(){
 
 
 
-    if(totalEstoque){
+    if(estoque){
 
 
-        totalEstoque.innerHTML =
+        estoque.innerHTML =
 
         banco.estoque.length;
+
+
+    }
+
+
+
+
+
+
+    // Projetos
+
+
+    let projetos =
+
+    document.getElementById(
+        "totalProjetos"
+    );
+
+
+
+    if(projetos){
+
+
+        projetos.innerHTML =
+
+        banco.projetos.length;
 
 
     }
@@ -296,8 +338,9 @@ function atualizarDashboard(){
 
 
 
+
 // =====================================
-// INICIALIZAÇÃO
+// INICIAR SISTEMA
 // =====================================
 
 
@@ -318,7 +361,6 @@ function(){
 
 
     atualizarDashboard();
-
 
 
 
