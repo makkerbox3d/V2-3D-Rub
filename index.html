@@ -20,7 +20,6 @@
 <div class="app">
 
 
-<!-- MENU LATERAL -->
 
 <aside class="sidebar">
 
@@ -28,7 +27,8 @@
 <div class="brand">
 
 
-<img id="logoEmpresa"
+<img 
+id="logoEmpresa"
 src="assets/logo/logo.png"
 onerror="this.style.display='none'">
 
@@ -47,6 +47,7 @@ Gestão Maker
 
 
 
+
 <nav>
 
 
@@ -55,9 +56,11 @@ Gestão Maker
 </button>
 
 
+
 <button onclick="mostrarTela('projetos')">
 🧊 Projetos 3D
 </button>
+
 
 
 <button onclick="mostrarTela('impressoras')">
@@ -65,9 +68,11 @@ Gestão Maker
 </button>
 
 
+
 <button onclick="mostrarTela('estoque')">
 📦 Estoque
 </button>
+
 
 
 <button onclick="mostrarTela('pintura')">
@@ -75,14 +80,17 @@ Gestão Maker
 </button>
 
 
+
 <button onclick="mostrarTela('financeiro')">
 💰 Financeiro
 </button>
 
 
+
 <button onclick="mostrarTela('clientes')">
 👥 Clientes
 </button>
+
 
 
 <button onclick="mostrarTela('config')">
@@ -94,16 +102,18 @@ Gestão Maker
 </nav>
 
 
+
 </aside>
 
 
 
 
 
-<!-- CONTEÚDO -->
-
 <main class="content">
 
+
+
+<!-- DASHBOARD -->
 
 
 <section id="dashboard" class="tela">
@@ -114,7 +124,9 @@ Dashboard
 </h1>
 
 
+
 <div class="cards">
+
 
 
 <div class="card">
@@ -124,6 +136,20 @@ Dashboard
 </h3>
 
 <strong id="totalImpressoras">
+0
+</strong>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>
+📦 Itens estoque
+</h3>
+
+<strong id="totalEstoque">
 0
 </strong>
 
@@ -145,22 +171,6 @@ Dashboard
 
 
 
-
-<div class="card">
-
-<h3>
-📦 Estoque
-</h3>
-
-<strong>
-R$ 0
-</strong>
-
-</div>
-
-
-
-
 <div class="card">
 
 <h3>
@@ -174,8 +184,8 @@ R$ 0
 </div>
 
 
-
 </div>
+
 
 
 </section>
@@ -184,11 +194,10 @@ R$ 0
 
 
 
-
 <!-- IMPRESSORAS -->
 
-<section id="impressoras" 
-class="tela escondida">
+
+<section id="impressoras" class="tela escondida">
 
 
 <h1>
@@ -199,13 +208,11 @@ class="tela escondida">
 <div class="form">
 
 
-<input 
-id="marca"
+<input id="marca"
 placeholder="Marca">
 
 
-<input 
-id="modelo"
+<input id="modelo"
 placeholder="Modelo">
 
 
@@ -237,29 +244,25 @@ SLS
 
 
 
-<input 
-id="valor"
+<input id="valor"
 type="number"
 placeholder="Valor da impressora">
 
 
 
-<input 
-id="potencia"
+<input id="potencia"
 type="number"
-placeholder="Potência em Watts">
+placeholder="Potência Watts">
 
 
 
-<input 
-id="kwh"
+<input id="kwh"
 type="number"
 placeholder="Valor kWh">
 
 
 
-<input 
-id="horas"
+<input id="horas"
 type="number"
 placeholder="Horas trabalhadas">
 
@@ -277,7 +280,6 @@ Cadastrar Impressora
 
 
 
-
 <div id="listaImpressoras">
 
 </div>
@@ -290,146 +292,113 @@ Cadastrar Impressora
 
 
 
+<!-- ESTOQUE -->
 
-<!-- CONFIGURAÇÃO -->
 
-
-<section id="config"
-class="tela escondida">
+<section id="estoque" class="tela escondida">
 
 
 <h1>
-⚙ Configuração da Empresa
+📦 Almoxarifado Maker
 </h1>
 
 
-<input
-id="novoNome"
-placeholder="Nome da empresa">
+
+<div class="form">
 
 
 
 <input
-id="novaCor"
-type="color">
+id="produtoNome"
+placeholder="Nome do produto">
 
 
 
-<button onclick="salvarEmpresa()">
+<select id="categoria">
 
-Salvar
+
+<option>
+Resina
+</option>
+
+
+<option>
+Filamento
+</option>
+
+
+<option>
+Tinta
+</option>
+
+
+<option>
+Consumível
+</option>
+
+
+<option>
+Ferramenta
+</option>
+
+
+
+</select>
+
+
+
+<input
+id="quantidade"
+type="number"
+placeholder="Quantidade">
+
+
+<select id="unidade">
+
+
+<option>
+ml
+</option>
+
+
+<option>
+g
+</option>
+
+
+<option>
+kg
+</option>
+
+
+<option>
+unidade
+</option>
+
+
+</select>
+
+
+
+<input
+id="valorProduto"
+type="number"
+placeholder="Valor pago">
+
+
+
+<input
+id="estoqueMinimo"
+type="number"
+placeholder="Estoque mínimo">
+
+
+
+<button onclick="adicionarEstoque()">
+
+Cadastrar Material
 
 </button>
-
-
-</section>
-
-
-
-
-
-
-<section id="projetos"
-class="tela escondida">
-
-
-<h1>
-🧊 Projetos 3D
-</h1>
-
-
-<p>
-Módulo em desenvolvimento
-</p>
-
-
-</section>
-
-
-
-
-<section id="estoque"
-class="tela escondida">
-
-
-<h1>
-📦 Estoque
-</h1>
-
-
-<p>
-Módulo em desenvolvimento
-</p>
-
-
-</section>
-
-
-
-
-
-<section id="pintura"
-class="tela escondida">
-
-
-<h1>
-🎨 Pintura
-</h1>
-
-
-<p>
-Módulo em desenvolvimento
-</p>
-
-
-</section>
-
-
-
-
-
-<section id="financeiro"
-class="tela escondida">
-
-
-<h1>
-💰 Financeiro
-</h1>
-
-
-<p>
-Módulo em desenvolvimento
-</p>
-
-
-</section>
-
-
-
-
-
-<section id="clientes"
-class="tela escondida">
-
-
-<h1>
-👥 Clientes
-</h1>
-
-
-<p>
-Módulo em desenvolvimento
-</p>
-
-
-</section>
-
-
-
-
-
-
-</main>
 
 
 
@@ -437,16 +406,10 @@ Módulo em desenvolvimento
 
 
 
+<div id="listaEstoque">
 
-
-<script src="js/database.js"></script>
-
-<script src="js/impressoras.js"></script>
-
-<script src="js/app.js"></script>
+</div>
 
 
 
-</body>
-
-</html>
+</section>
