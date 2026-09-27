@@ -7,9 +7,14 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MakkerBox 3D OS</title>
+
+<title>
+MakkerBox 3D OS
+</title>
+
 
 <link rel="stylesheet" href="css/style.css">
+
 
 </head>
 
@@ -18,6 +23,7 @@
 
 
 <div class="app">
+
 
 
 <!-- MENU LATERAL -->
@@ -35,13 +41,19 @@ onerror="this.style.display='none'"
 >
 
 
+
 <h2 id="nomeEmpresa">
+
 MakkerBox 3D OS
+
 </h2>
 
 
+
 <p>
-Gestão Inteligente 3D
+
+Gestão Maker
+
 </p>
 
 
@@ -49,53 +61,82 @@ Gestão Inteligente 3D
 
 
 
+
+
 <nav>
 
 
 <button onclick="mostrarTela('dashboard')">
+
 🏠 Dashboard
+
 </button>
 
 
 
 <button onclick="mostrarTela('projetos')">
+
 🧊 Projetos 3D
+
 </button>
+
 
 
 
 <button onclick="mostrarTela('impressoras')">
+
 🖨 Impressoras
+
 </button>
+
+
 
 
 
 <button onclick="mostrarTela('estoque')">
+
 📦 Estoque
+
 </button>
+
+
 
 
 
 <button onclick="mostrarTela('pintura')">
+
 🎨 Pintura
+
 </button>
+
+
 
 
 
 <button onclick="mostrarTela('financeiro')">
+
 💰 Financeiro
+
 </button>
+
+
 
 
 
 <button onclick="mostrarTela('clientes')">
+
 👥 Clientes
+
 </button>
 
 
 
+
+
 <button onclick="mostrarTela('config')">
+
 ⚙ Configuração
+
 </button>
 
 
@@ -111,7 +152,8 @@ Gestão Inteligente 3D
 
 
 
-<!-- CONTEÚDO -->
+<!-- ÁREA PRINCIPAL -->
+
 
 <main class="content">
 
@@ -128,8 +170,11 @@ class="tela">
 
 
 <h1>
+
 Dashboard
+
 </h1>
+
 
 
 
@@ -139,13 +184,20 @@ Dashboard
 
 <div class="card">
 
+
 <h3>
+
 🖨 Impressoras
+
 </h3>
+
 
 <strong id="totalImpressoras">
+
 0
+
 </strong>
+
 
 </div>
 
@@ -155,13 +207,20 @@ Dashboard
 
 <div class="card">
 
+
 <h3>
+
 🧊 Projetos
+
 </h3>
+
 
 <strong id="totalProjetos">
+
 0
+
 </strong>
+
 
 </div>
 
@@ -171,13 +230,20 @@ Dashboard
 
 <div class="card">
 
+
 <h3>
+
 📦 Estoque
+
 </h3>
+
 
 <strong id="totalEstoque">
+
 0
+
 </strong>
+
 
 </div>
 
@@ -187,35 +253,33 @@ Dashboard
 
 <div class="card">
 
+
 <h3>
-💰 Valor produzido
+
+💰 Produção
+
 </h3>
+
 
 <strong id="valorProducao">
+
 R$ 0
+
 </strong>
 
-</div>
-
-
 
 </div>
 
 
 
 
-
-<div class="card" style="margin-top:30px">
-
-
-<h3>
-🚀 Status da Produção
-</h3>
+</div>
 
 
-<p>
-Nenhuma produção em andamento.
-</p>
+
+
+
+<div id="areaModulos">
 
 
 </div>
@@ -225,609 +289,70 @@ Nenhuma produção em andamento.
 
 </section>
 
-<!-- =====================================
-     PROJETOS 3D
-===================================== -->
 
 
-<section
+
+
+<!-- CONTAINERS DOS MÓDULOS -->
+
+
+<section 
 id="projetos"
 class="tela escondida">
 
 
-<h1>
-🧊 Projetos 3D
-</h1>
-
-
-
-
-<div class="form">
-
-
-<input
-id="projetoNome"
-placeholder="Nome da peça"
->
-
-
-
-<input
-id="projetoCliente"
-placeholder="Cliente"
->
-
-
-
-<input
-id="projetoArquivo"
-placeholder="Arquivo Blender / STL"
->
-
-
-
-
-
-<select id="projetoImpressora">
-
-<option value="">
-Selecione a impressora
-</option>
-
-
-</select>
-
-
-
-
-
-<select id="projetoMaterial">
-
-
-<option value="">
-Selecione material
-</option>
-
-
-</select>
-
-
-
-
-
-<input
-id="projetoPeso"
-type="number"
-placeholder="Peso da peça (g)"
->
-
-
-
-
-<input
-id="projetoTempo"
-type="number"
-placeholder="Tempo impressão (horas)"
->
-
-
-
-
-<input
-id="projetoVenda"
-type="number"
-placeholder="Preço de venda"
->
-
-
-
-
-
-<select id="projetoStatus">
-
-
-<option>
-💡 Ideia
-</option>
-
-
-<option>
-🧊 Modelagem
-</option>
-
-
-<option>
-🖨 Impressão
-</option>
-
-
-<option>
-🧽 Acabamento
-</option>
-
-
-<option>
-🎨 Pintura
-</option>
-
-
-<option>
-📦 Entregue
-</option>
-
-
-
-</select>
-
-
-
-
-
-
-<button onclick="adicionarProjeto()">
-
-Cadastrar Projeto
-
-</button>
-
-
-
-</div>
-
-
-
-
-
-<div id="listaProjetos">
-
-</div>
-
-
-
 </section>
 
 
 
 
-
-
-
-<!-- =====================================
-     IMPRESSORAS
-===================================== -->
-
-
-<section
+<section 
 id="impressoras"
 class="tela escondida">
 
 
-<h1>
-🖨 Impressoras 3D
-</h1>
-
-
-
-
-
-<div class="form">
-
-
-
-<input
-
-id="marca"
-
-placeholder="Marca"
-
->
-
-
-
-<input
-
-id="modelo"
-
-placeholder="Modelo"
-
->
-
-
-
-
-<select id="tipo">
-
-
-<option>
-FDM
-</option>
-
-
-<option>
-SLA
-</option>
-
-
-<option>
-MSLA
-</option>
-
-
-<option>
-SLS
-</option>
-
-
-</select>
-
-
-
-
-
-<input
-
-id="valor"
-
-type="number"
-
-placeholder="Valor da impressora"
-
->
-
-
-
-
-<input
-
-id="potencia"
-
-type="number"
-
-placeholder="Potência Watts"
-
->
-
-
-
-
-<input
-
-id="kwh"
-
-type="number"
-
-placeholder="Valor kWh"
-
->
-
-
-
-
-<input
-
-id="horas"
-
-type="number"
-
-placeholder="Horas trabalhadas"
-
->
-
-
-
-
-
-<button onclick="adicionarImpressora()">
-
-Cadastrar Impressora
-
-</button>
-
-
-
-
-</div>
-
-
-
-
-
-<div id="listaImpressoras">
-
-</div>
-
-
-
-
-
 </section>
 
-<!-- =====================================
-     ESTOQUE
-===================================== -->
 
 
-<section
+
+
+<section 
 id="estoque"
 class="tela escondida">
 
 
-<h1>
-📦 Almoxarifado Maker
-</h1>
-
-
-
-
-<div class="form">
-
-
-
-<input
-
-id="produtoNome"
-
-placeholder="Nome do material"
-
->
-
-
-
-<select id="categoria">
-
-
-<option>
-Resina
-</option>
-
-
-<option>
-Filamento
-</option>
-
-
-<option>
-Tinta
-</option>
-
-
-<option>
-Consumível
-</option>
-
-
-<option>
-Ferramenta
-</option>
-
-
-
-</select>
-
-
-
-
-
-<input
-
-id="quantidade"
-
-type="number"
-
-placeholder="Quantidade"
-
->
-
-
-
-
-<select id="unidade">
-
-
-<option>
-ml
-</option>
-
-
-<option>
-g
-</option>
-
-
-<option>
-kg
-</option>
-
-
-<option>
-unidade
-</option>
-
-
-
-</select>
-
-
-
-
-
-<input
-
-id="valorProduto"
-
-type="number"
-
-placeholder="Valor pago"
-
->
-
-
-
-
-<input
-
-id="estoqueMinimo"
-
-type="number"
-
-placeholder="Estoque mínimo"
-
->
-
-
-
-
-<button onclick="adicionarEstoque()">
-
-Cadastrar Material
-
-</button>
-
-
-
-</div>
-
-
-
-
-
-<div id="listaEstoque">
-
-</div>
-
-
-
 </section>
 
 
 
 
 
-
-
-<!-- =====================================
-     CONFIGURAÇÃO
-===================================== -->
-
-
-<section
-id="config"
-class="tela escondida">
-
-
-<h1>
-⚙ Configuração
-</h1>
-
-
-
-<div class="form">
-
-
-<input
-
-id="novoNome"
-
-placeholder="Nome da empresa"
-
->
-
-
-
-
-<input
-
-id="novaCor"
-
-type="color"
-
->
-
-
-
-
-<button onclick="salvarEmpresa()">
-
-Salvar Configuração
-
-</button>
-
-
-
-</div>
-
-
-
-</section>
-
-
-
-
-
-
-
-
-<!-- =====================================
-     PINTURA
-===================================== -->
-
-
-<section
+<section 
 id="pintura"
 class="tela escondida">
 
 
-<h1>
-🎨 Pintura e Acabamento
-</h1>
-
-
-<div class="card">
-
-
-<p>
-Controle de aerógrafo, compressor, tintas e processos de acabamento.
-</p>
-
-
-</div>
-
-
-
 </section>
 
 
 
 
 
-
-
-<!-- =====================================
-     FINANCEIRO
-===================================== -->
-
-
-<section
+<section 
 id="financeiro"
 class="tela escondida">
 
 
-<h1>
-💰 Financeiro
-</h1>
+</section>
 
 
 
-<div class="card">
 
 
-<p>
-Custos, vendas, lucro e relatórios.
-</p>
-
-
-</div>
-
+<section 
+id="clientes"
+class="tela escondida">
 
 
 </section>
@@ -836,34 +361,9 @@ Custos, vendas, lucro e relatórios.
 
 
 
-
-
-<!-- =====================================
-     CLIENTES
-===================================== -->
-
-
-<section
-id="clientes"
+<section 
+id="config"
 class="tela escondida">
-
-
-<h1>
-👥 Clientes
-</h1>
-
-
-
-<div class="card">
-
-
-<p>
-Cadastro de clientes e pedidos.
-</p>
-
-
-</div>
-
 
 
 </section>
@@ -876,6 +376,7 @@ Cadastro de clientes e pedidos.
 </main>
 
 
+
 </div>
 
 
@@ -884,23 +385,33 @@ Cadastro de clientes e pedidos.
 
 
 
-<!-- =====================================
-     SCRIPTS
-===================================== -->
+
+<!-- SISTEMA -->
 
 
 <script src="js/database.js"></script>
 
-<script src="js/impressoras.js"></script>
-
-<script src="js/estoque.js"></script>
-
-<script src="js/projetos.js"></script>
 
 <script src="js/app.js"></script>
 
 
+<script src="js/modulos.js"></script>
+
+
+<script src="js/impressoras.js"></script>
+
+
+<script src="js/estoque.js"></script>
+
+
+<script src="js/projetos.js"></script>
+
+
+<script src="js/pintura.js"></script>
+
+
 
 </body>
+
 
 </html>
