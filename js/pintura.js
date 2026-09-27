@@ -16,12 +16,14 @@ function adicionarPintura(){
 
 
 
-let item = {
+let material = {
 
 
 
 id:
+
 gerarID(),
+
 
 
 
@@ -33,11 +35,15 @@ document.getElementById(
 
 
 
+
+
 tipo:
 
 document.getElementById(
 "pinturaTipo"
 ).value,
+
+
 
 
 
@@ -49,23 +55,40 @@ document.getElementById(
 
 
 
+
+
 quantidade:
 
 Number(
+
 document.getElementById(
 "pinturaQuantidade"
 ).value
+
 ),
+
+
 
 
 
 valor:
 
 Number(
+
 document.getElementById(
 "pinturaValor"
 ).value
-)
+
+),
+
+
+
+
+
+data:
+
+new Date()
+.toLocaleDateString()
 
 
 
@@ -75,13 +98,17 @@ document.getElementById(
 
 
 
-item.custoUnitario =
+
+
+material.custoUnitario =
+
+
 
 (
 
-item.valor /
+material.valor /
 
-item.quantidade
+material.quantidade
 
 )
 
@@ -92,9 +119,13 @@ item.quantidade
 
 
 
+
+
 banco.pintura.push(
-item
+material
 );
+
+
 
 
 
@@ -102,7 +133,11 @@ salvarBanco();
 
 
 
+
+
 mostrarPinturas();
+
+
 
 
 
@@ -110,8 +145,10 @@ limparPintura();
 
 
 
-}
 
+
+
+}
 
 
 
@@ -137,11 +174,13 @@ document.getElementById(
 
 
 
+
 if(!lista){
 
 return;
 
 }
+
 
 
 
@@ -153,8 +192,9 @@ lista.innerHTML="";
 
 
 
-banco.pintura
-.forEach(function(p){
+banco.pintura.forEach(function(p){
+
+
 
 
 
@@ -186,16 +226,25 @@ ${p.cor}
 
 <p>
 Quantidade:
-${p.quantidade}
+${p.quantidade} ml
 </p>
 
 
 
 <p>
-Custo unidade:
+Custo por ml:
+
 R$ ${p.custoUnitario}
 
 </p>
+
+
+
+<p>
+Cadastro:
+${p.data}
+</p>
+
 
 
 </div>
@@ -219,12 +268,16 @@ R$ ${p.custoUnitario}
 
 
 
+// =====================================
+// LIMPAR FORMULÁRIO
+// =====================================
+
 
 function limparPintura(){
 
 
 
-let campos=[
+let campos = [
 
 
 "pinturaNome",
@@ -240,6 +293,9 @@ let campos=[
 
 
 
+
+
+
 campos.forEach(function(id){
 
 
@@ -250,11 +306,15 @@ document.getElementById(id);
 
 
 
+
 if(campo){
+
 
 campo.value="";
 
+
 }
+
 
 
 });
@@ -269,7 +329,6 @@ campo.value="";
 
 
 
-
 window.addEventListener(
 
 "load",
@@ -277,7 +336,9 @@ window.addEventListener(
 function(){
 
 
+
 mostrarPinturas();
+
 
 
 });
