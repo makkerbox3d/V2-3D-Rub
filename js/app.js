@@ -1,7 +1,7 @@
 /* =====================================
    MakkerBox 3D OS
 
-   APP CONTROLLER V4
+   APP CONTROLLER V5
 
 ===================================== */
 
@@ -20,15 +20,16 @@ function mostrarTela(tela){
 
 
 
-    telas.forEach(function(item){
+    telas.forEach(function(secao){
 
 
-        item.classList.add(
+        secao.classList.add(
             "escondida"
         );
 
 
     });
+
 
 
 
@@ -56,8 +57,9 @@ function mostrarTela(tela){
 
 
 
+
 // =====================================
-// CARREGAR EMPRESA
+// EMPRESA
 // =====================================
 
 
@@ -74,11 +76,12 @@ function carregarEmpresa(){
 
 
 
-
     let nome =
+
     document.getElementById(
         "nomeEmpresa"
     );
+
 
 
 
@@ -96,17 +99,18 @@ function carregarEmpresa(){
 
 
 
-    if(banco.empresa.corPrincipal){
-
+    if(
+    banco.empresa.corPrincipal
+    ){
 
 
         document.documentElement
         .style
         .setProperty(
 
-        "--primary",
+            "--primary",
 
-        banco.empresa.corPrincipal
+            banco.empresa.corPrincipal
 
         );
 
@@ -118,11 +122,13 @@ function carregarEmpresa(){
 
 
 
-    if(banco.empresa.logo){
-
+    if(
+    banco.empresa.logo
+    ){
 
 
         let logo =
+
         document.getElementById(
             "logoEmpresa"
         );
@@ -152,7 +158,7 @@ function carregarEmpresa(){
 
 
 // =====================================
-// CONFIGURAÇÃO EMPRESA
+// SALVAR EMPRESA
 // =====================================
 
 
@@ -160,59 +166,56 @@ function salvarEmpresa(){
 
 
 
-    let nome =
+let nome =
 
-    document.getElementById(
-        "novoNome"
-    ).value;
-
-
+document.getElementById(
+"novoNome"
+).value;
 
 
 
-    let cor =
 
-    document.getElementById(
-        "novaCor"
-    ).value;
+let cor =
 
+document.getElementById(
+"novaCor"
+).value;
 
 
 
 
 
-    if(nome){
+if(nome){
 
 
-        banco.empresa.nome =
-        nome;
+banco.empresa.nome =
+nome;
 
 
-    }
-
-
-
-
-
-
-    if(cor){
-
-
-        banco.empresa.corPrincipal =
-        cor;
-
-
-    }
+}
 
 
 
 
 
-    salvarBanco();
+if(cor){
+
+
+banco.empresa.corPrincipal =
+cor;
+
+
+}
 
 
 
-    carregarEmpresa();
+
+
+salvarBanco();
+
+
+
+carregarEmpresa();
 
 
 
@@ -231,31 +234,35 @@ function salvarEmpresa(){
 // =====================================
 
 
-function carregarImpressorasProjeto(){
+function atualizarListaImpressoras(){
 
 
 
-    let select =
+let select =
 
-    document.getElementById(
-        "projetoImpressora"
-    );
-
-
-
-    if(!select){
-
-        return;
-
-    }
+document.getElementById(
+"projetoImpressora"
+);
 
 
 
 
-    select.innerHTML = `
+if(!select){
 
-<option value="">
-Selecione a impressora
+return;
+
+}
+
+
+
+
+
+select.innerHTML = `
+
+<option>
+
+Selecione impressora
+
 </option>
 
 `;
@@ -265,11 +272,13 @@ Selecione a impressora
 
 
 
-    banco.impressoras.forEach(function(i){
+banco.impressoras
+.forEach(function(i){
 
 
 
-        select.innerHTML += `
+select.innerHTML += `
+
 
 <option value="${i.modelo}">
 
@@ -278,11 +287,12 @@ ${i.modelo}
 
 </option>
 
+
 `;
 
 
 
-    });
+});
 
 
 
@@ -297,53 +307,38 @@ ${i.modelo}
 
 
 // =====================================
-// CARREGAR MATERIAIS NO PROJETO
+// CARREGAR MATERIAIS
 // =====================================
 
 
-function carregarMateriaisProjeto(){
+function atualizarListaMateriais(){
 
 
 
-    let select =
+let select =
 
-    document.getElementById(
-        "projetoMaterial"
-    );
-
-
-
-    if(!select){
-
-        return;
-
-    }
+document.getElementById(
+"projetoMaterial"
+);
 
 
 
 
+if(!select){
 
-    select.innerHTML = `
+return;
 
-<option value="">
+}
+
+
+
+
+
+select.innerHTML = `
+
+<option>
+
 Selecione material
-</option>
-
-`;
-
-
-
-
-
-    banco.estoque.forEach(function(p){
-
-
-
-        select.innerHTML += `
-
-<option value="${p.nome}">
-
-${p.nome}
 
 </option>
 
@@ -351,7 +346,29 @@ ${p.nome}
 
 
 
-    });
+
+
+
+banco.estoque
+.forEach(function(m){
+
+
+
+select.innerHTML += `
+
+
+<option value="${m.nome}">
+
+${m.nome}
+
+</option>
+
+
+`;
+
+
+
+});
 
 
 
@@ -366,7 +383,7 @@ ${p.nome}
 
 
 // =====================================
-// ATUALIZAR DASHBOARD
+// DASHBOARD
 // =====================================
 
 
@@ -386,6 +403,7 @@ if(imp){
 
 
 imp.innerHTML =
+
 banco.impressoras.length;
 
 
@@ -396,7 +414,7 @@ banco.impressoras.length;
 
 
 
-let est =
+let estoque =
 
 document.getElementById(
 "totalEstoque"
@@ -404,10 +422,11 @@ document.getElementById(
 
 
 
-if(est){
+if(estoque){
 
 
-est.innerHTML =
+estoque.innerHTML =
+
 banco.estoque.length;
 
 
@@ -419,7 +438,7 @@ banco.estoque.length;
 
 
 
-let proj =
+let projetos =
 
 document.getElementById(
 "totalProjetos"
@@ -427,10 +446,11 @@ document.getElementById(
 
 
 
-if(proj){
+if(projetos){
 
 
-proj.innerHTML =
+projetos.innerHTML =
+
 banco.projetos.length;
 
 
@@ -441,16 +461,21 @@ banco.projetos.length;
 
 
 
-
 let valor = 0;
 
 
 
-banco.projetos.forEach(function(p){
+banco.projetos
+.forEach(function(p){
+
 
 
 valor +=
-Number(p.venda || 0);
+
+Number(
+p.venda || 0
+);
+
 
 
 });
@@ -459,7 +484,8 @@ Number(p.venda || 0);
 
 
 
-let valorTela =
+
+let producao =
 
 document.getElementById(
 "valorProducao"
@@ -467,17 +493,20 @@ document.getElementById(
 
 
 
-if(valorTela){
+if(producao){
 
 
-valorTela.innerHTML =
+producao.innerHTML =
+
 
 "R$ " +
+
 valor.toFixed(2);
 
 
 
 }
+
 
 
 
@@ -512,11 +541,9 @@ carregarEmpresa();
 
 
 
-carregarImpressorasProjeto();
-
-
-
-carregarMateriaisProjeto();
+mostrarTela(
+"dashboard"
+);
 
 
 
@@ -524,12 +551,12 @@ atualizarDashboard();
 
 
 
-mostrarTela(
-"dashboard"
-);
+atualizarListaImpressoras();
 
 
 
-}
+atualizarListaMateriais();
 
-);
+
+
+});
