@@ -20,6 +20,7 @@
 <div class="app">
 
 
+<!-- SIDEBAR -->
 
 <aside class="sidebar">
 
@@ -30,7 +31,8 @@
 <img 
 id="logoEmpresa"
 src="assets/logo/logo.png"
-onerror="this.style.display='none'">
+onerror="this.style.display='none'"
+>
 
 
 <h2 id="nomeEmpresa">
@@ -47,7 +49,6 @@ Gestão Maker
 
 
 
-
 <nav>
 
 
@@ -56,11 +57,9 @@ Gestão Maker
 </button>
 
 
-
 <button onclick="mostrarTela('projetos')">
 🧊 Projetos 3D
 </button>
-
 
 
 <button onclick="mostrarTela('impressoras')">
@@ -68,11 +67,9 @@ Gestão Maker
 </button>
 
 
-
 <button onclick="mostrarTela('estoque')">
 📦 Estoque
 </button>
-
 
 
 <button onclick="mostrarTela('pintura')">
@@ -80,17 +77,14 @@ Gestão Maker
 </button>
 
 
-
 <button onclick="mostrarTela('financeiro')">
 💰 Financeiro
 </button>
 
 
-
 <button onclick="mostrarTela('clientes')">
 👥 Clientes
 </button>
-
 
 
 <button onclick="mostrarTela('config')">
@@ -102,21 +96,27 @@ Gestão Maker
 </nav>
 
 
-
 </aside>
 
 
 
 
 
+<!-- ÁREA PRINCIPAL -->
+
+
 <main class="content">
+
+
 
 
 
 <!-- DASHBOARD -->
 
 
-<section id="dashboard" class="tela">
+<section 
+id="dashboard"
+class="tela">
 
 
 <h1>
@@ -126,7 +126,6 @@ Dashboard
 
 
 <div class="cards">
-
 
 
 <div class="card">
@@ -139,21 +138,26 @@ Dashboard
 0
 </strong>
 
+
 </div>
+
 
 
 
 <div class="card">
 
 <h3>
-📦 Itens estoque
+📦 Estoque
 </h3>
 
 <strong id="totalEstoque">
 0
 </strong>
 
+
 </div>
+
+
 
 
 
@@ -163,11 +167,14 @@ Dashboard
 🧊 Projetos
 </h3>
 
-<strong>
+<strong id="totalProjetos">
 0
 </strong>
 
+
 </div>
+
+
 
 
 
@@ -181,8 +188,156 @@ Dashboard
 R$ 0
 </strong>
 
+
 </div>
 
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+<!-- PROJETOS 3D -->
+
+
+<section 
+id="projetos"
+class="tela escondida">
+
+
+<h1>
+🧊 Projetos 3D
+</h1>
+
+
+
+<div class="form">
+
+
+<input
+id="projetoNome"
+placeholder="Nome da peça"
+>
+
+
+
+<input
+id="projetoCliente"
+placeholder="Cliente"
+>
+
+
+
+<input
+id="projetoArquivo"
+placeholder="Arquivo Blender / STL"
+>
+
+
+
+<select id="projetoMaterial">
+
+
+<option>
+Resina
+</option>
+
+
+<option>
+PLA
+</option>
+
+
+<option>
+PETG
+</option>
+
+
+</select>
+
+
+
+
+<input
+id="projetoPeso"
+type="number"
+placeholder="Peso da peça (g)"
+>
+
+
+
+
+<input
+id="projetoTempo"
+type="number"
+placeholder="Tempo impressão (horas)"
+>
+
+
+
+<input
+id="projetoVenda"
+type="number"
+placeholder="Preço de venda"
+>
+
+
+
+<select id="projetoStatus">
+
+
+<option>
+💡 Ideia
+</option>
+
+
+<option>
+🧊 Modelagem
+</option>
+
+
+<option>
+🖨 Impressão
+</option>
+
+
+<option>
+🎨 Pintura
+</option>
+
+
+<option>
+📦 Entregue
+</option>
+
+
+
+</select>
+
+
+
+<button onclick="adicionarProjeto()">
+
+Cadastrar Projeto
+
+</button>
+
+
+
+</div>
+
+
+
+
+<div id="listaProjetos">
 
 </div>
 
@@ -197,7 +352,9 @@ R$ 0
 <!-- IMPRESSORAS -->
 
 
-<section id="impressoras" class="tela escondida">
+<section 
+id="impressoras"
+class="tela escondida">
 
 
 <h1>
@@ -208,13 +365,14 @@ R$ 0
 <div class="form">
 
 
-<input id="marca"
+<input 
+id="marca"
 placeholder="Marca">
 
 
-<input id="modelo"
+<input 
+id="modelo"
 placeholder="Modelo">
-
 
 
 <select id="tipo">
@@ -235,37 +393,31 @@ MSLA
 </option>
 
 
-<option>
-SLS
-</option>
-
-
 </select>
 
 
-
-<input id="valor"
+<input 
+id="valor"
 type="number"
 placeholder="Valor da impressora">
 
 
-
-<input id="potencia"
+<input 
+id="potencia"
 type="number"
 placeholder="Potência Watts">
 
 
-
-<input id="kwh"
+<input 
+id="kwh"
 type="number"
 placeholder="Valor kWh">
 
 
-
-<input id="horas"
+<input 
+id="horas"
 type="number"
 placeholder="Horas trabalhadas">
-
 
 
 <button onclick="adicionarImpressora()">
@@ -275,9 +427,7 @@ Cadastrar Impressora
 </button>
 
 
-
 </div>
-
 
 
 <div id="listaImpressoras">
@@ -285,17 +435,13 @@ Cadastrar Impressora
 </div>
 
 
-
 </section>
-
-
-
-
 
 <!-- ESTOQUE -->
 
-
-<section id="estoque" class="tela escondida">
+<section 
+id="estoque"
+class="tela escondida">
 
 
 <h1>
@@ -303,14 +449,13 @@ Cadastrar Impressora
 </h1>
 
 
-
 <div class="form">
-
 
 
 <input
 id="produtoNome"
-placeholder="Nome do produto">
+placeholder="Nome do produto"
+>
 
 
 
@@ -342,7 +487,6 @@ Ferramenta
 </option>
 
 
-
 </select>
 
 
@@ -350,7 +494,9 @@ Ferramenta
 <input
 id="quantidade"
 type="number"
-placeholder="Quantidade">
+placeholder="Quantidade"
+>
+
 
 
 <select id="unidade">
@@ -380,17 +526,22 @@ unidade
 
 
 
+
 <input
 id="valorProduto"
 type="number"
-placeholder="Valor pago">
+placeholder="Valor pago"
+>
+
 
 
 
 <input
 id="estoqueMinimo"
 type="number"
-placeholder="Estoque mínimo">
+placeholder="Estoque mínimo"
+>
+
 
 
 
@@ -414,14 +565,24 @@ Cadastrar Material
 
 </section>
 
+
+
+
+
+
+
 <!-- CONFIGURAÇÃO -->
 
-<section id="config" class="tela escondida">
+
+<section
+id="config"
+class="tela escondida">
 
 
 <h1>
-⚙ Configuração
+⚙ Configuração da Empresa
 </h1>
+
 
 
 <div class="form">
@@ -429,13 +590,15 @@ Cadastrar Material
 
 <input
 id="novoNome"
-placeholder="Nome da empresa">
+placeholder="Nome da empresa"
+>
 
 
 
 <input
 id="novaCor"
-type="color">
+type="color"
+>
 
 
 
@@ -456,38 +619,13 @@ Salvar Configuração
 
 
 
-<!-- PROJETOS -->
-
-
-<section id="projetos" class="tela escondida">
-
-
-<h1>
-🧊 Projetos 3D
-</h1>
-
-
-<div class="card">
-
-<p>
-Módulo de projetos será conectado ao Blender, STL e clientes.
-</p>
-
-
-</div>
-
-
-</section>
-
-
-
-
-
 
 <!-- PINTURA -->
 
 
-<section id="pintura" class="tela escondida">
+<section
+id="pintura"
+class="tela escondida">
 
 
 <h1>
@@ -499,7 +637,7 @@ Módulo de projetos será conectado ao Blender, STL e clientes.
 
 
 <p>
-Controle de tintas, aerógrafos e processos de acabamento.
+Módulo para aerógrafo, tintas, compressor e acabamento.
 </p>
 
 
@@ -513,10 +651,14 @@ Controle de tintas, aerógrafos e processos de acabamento.
 
 
 
+
+
 <!-- FINANCEIRO -->
 
 
-<section id="financeiro" class="tela escondida">
+<section
+id="financeiro"
+class="tela escondida">
 
 
 <h1>
@@ -528,7 +670,7 @@ Controle de tintas, aerógrafos e processos de acabamento.
 
 
 <p>
-Cálculo de custos, vendas e lucro.
+Controle de custos, vendas e lucro.
 </p>
 
 
@@ -542,10 +684,13 @@ Cálculo de custos, vendas e lucro.
 
 
 
+
 <!-- CLIENTES -->
 
 
-<section id="clientes" class="tela escondida">
+<section
+id="clientes"
+class="tela escondida">
 
 
 <h1>
@@ -574,25 +719,27 @@ Cadastro de clientes e pedidos.
 </main>
 
 
-
 </div>
 
 
 
 
 
-<!-- BANCO -->
+
+
+<!-- SCRIPTS -->
+
 
 <script src="js/database.js"></script>
-
-
-<!-- MÓDULOS -->
 
 
 <script src="js/impressoras.js"></script>
 
 
 <script src="js/estoque.js"></script>
+
+
+<script src="js/projetos.js"></script>
 
 
 <script src="js/app.js"></script>
