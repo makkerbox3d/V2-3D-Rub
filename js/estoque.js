@@ -1,11 +1,9 @@
 /* =====================================
    MakkerBox 3D OS
 
-   ESTOQUE V2
+   ESTOQUE V3
 
 ===================================== */
-
-
 
 
 
@@ -21,8 +19,12 @@ function adicionarEstoque(){
 let produto = {
 
 
+
 id:
+
 gerarID(),
+
+
 
 
 
@@ -34,6 +36,8 @@ document.getElementById(
 
 
 
+
+
 categoria:
 
 document.getElementById(
@@ -42,13 +46,19 @@ document.getElementById(
 
 
 
+
+
 quantidade:
 
 Number(
+
 document.getElementById(
 "quantidade"
 ).value
+
 ),
+
+
 
 
 
@@ -60,27 +70,46 @@ document.getElementById(
 
 
 
+
+
 valor:
 
 Number(
+
 document.getElementById(
 "valorProduto"
 ).value
+
 ),
+
+
 
 
 
 minimo:
 
 Number(
+
 document.getElementById(
 "estoqueMinimo"
 ).value
+
 ),
 
 
 
-consumo: []
+
+
+consumo:[],
+
+
+
+
+
+dataCadastro:
+
+new Date()
+.toLocaleDateString()
 
 
 
@@ -91,13 +120,15 @@ consumo: []
 
 
 
-// custo por unidade
+// CUSTO UNITÁRIO
 
 
 produto.custoUnitario =
 
 
+
 (
+
 produto.valor /
 
 produto.quantidade
@@ -118,7 +149,14 @@ produto
 
 
 
+
+
+
+
 salvarBanco();
+
+
+
 
 
 
@@ -126,11 +164,26 @@ mostrarEstoque();
 
 
 
+
+
+
 atualizarDashboard();
 
 
 
+
+
+
+atualizarListaMateriais();
+
+
+
+
+
+
 limparEstoque();
+
+
 
 
 
@@ -145,7 +198,7 @@ limparEstoque();
 
 
 // =====================================
-// LISTAR ESTOQUE
+// MOSTRAR ESTOQUE
 // =====================================
 
 
@@ -161,11 +214,14 @@ document.getElementById(
 
 
 
+
+
 if(!lista){
 
 return;
 
 }
+
 
 
 
@@ -177,11 +233,13 @@ lista.innerHTML="";
 
 
 
-banco.estoque.forEach(function(p){
+
+banco.estoque
+.forEach(function(p){
 
 
 
-let alerta="";
+let alerta = "";
 
 
 
@@ -192,11 +250,11 @@ p.quantidade <= p.minimo
 
 
 alerta =
-
 "⚠ Estoque baixo";
 
 
 }
+
 
 
 
@@ -210,30 +268,46 @@ lista.innerHTML += `
 
 
 <h3>
+
 📦 ${p.nome}
+
 </h3>
 
 
+
+
 <p>
+
 Categoria:
+
 ${p.categoria}
+
 </p>
 
 
+
+
 <p>
+
 Quantidade:
+
 ${p.quantidade}
+
 ${p.unidade}
+
 </p>
 
 
 
+
 <p>
+
 Custo unidade:
 
 R$ ${p.custoUnitario}
 
 </p>
+
 
 
 
@@ -253,7 +327,6 @@ ${alerta}
 
 
 
-
 });
 
 
@@ -269,7 +342,7 @@ ${alerta}
 
 
 // =====================================
-// BAIXAR MATERIAL
+// CONSUMIR MATERIAL
 // =====================================
 
 
@@ -305,8 +378,9 @@ return false;
 
 
 
+material.quantidade -=
 
-material.quantidade -= quantidade;
+quantidade;
 
 
 
@@ -317,6 +391,7 @@ material.quantidade -= quantidade;
 material.consumo.push({
 
 
+
 data:
 
 new Date()
@@ -324,7 +399,10 @@ new Date()
 
 
 
+
 quantidade,
+
+
 
 
 projeto
@@ -338,12 +416,15 @@ projeto
 
 
 
-
 salvarBanco();
 
 
 
+
+
 mostrarEstoque();
+
+
 
 
 
@@ -387,7 +468,9 @@ let campos=[
 
 
 
+
 campos.forEach(function(id){
+
 
 
 let campo =
@@ -396,11 +479,15 @@ document.getElementById(id);
 
 
 
+
 if(campo){
+
 
 campo.value="";
 
+
 }
+
 
 
 });
@@ -415,6 +502,8 @@ campo.value="";
 
 
 
+
+
 window.addEventListener(
 
 "load",
@@ -422,7 +511,9 @@ window.addEventListener(
 function(){
 
 
+
 mostrarEstoque();
+
 
 
 });
