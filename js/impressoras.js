@@ -1,10 +1,15 @@
 /* =====================================
    MakkerBox 3D OS
 
-   IMPRESSORAS V2
+   IMPRESSORAS V3
 
 ===================================== */
 
+
+
+// =====================================
+// CADASTRAR IMPRESSORA
+// =====================================
 
 
 function adicionarImpressora(){
@@ -14,8 +19,12 @@ function adicionarImpressora(){
 let impressora = {
 
 
+
 id:
+
 gerarID(),
+
+
 
 
 
@@ -27,11 +36,15 @@ document.getElementById(
 
 
 
+
+
 modelo:
 
 document.getElementById(
 "modelo"
 ).value,
+
+
 
 
 
@@ -43,43 +56,61 @@ document.getElementById(
 
 
 
+
+
 valor:
 
 Number(
+
 document.getElementById(
 "valor"
 ).value
+
 ),
+
+
 
 
 
 potencia:
 
 Number(
+
 document.getElementById(
 "potencia"
 ).value
+
 ),
+
+
 
 
 
 kwh:
 
 Number(
+
 document.getElementById(
 "kwh"
 ).value
+
 ),
+
+
 
 
 
 horas:
 
 Number(
+
 document.getElementById(
 "horas"
 ).value
+
 ),
+
+
 
 
 
@@ -87,7 +118,9 @@ manutencoes:[],
 
 
 
-data:
+
+
+dataCadastro:
 
 new Date()
 .toLocaleDateString()
@@ -95,6 +128,7 @@ new Date()
 
 
 };
+
 
 
 
@@ -111,9 +145,13 @@ impressora
 
 
 
+
 banco.impressoras.push(
 impressora
 );
+
+
+
 
 
 
@@ -121,7 +159,13 @@ salvarBanco();
 
 
 
+
+
+
 mostrarImpressoras();
+
+
+
 
 
 
@@ -129,7 +173,19 @@ atualizarDashboard();
 
 
 
+
+
+
+atualizarListaImpressoras();
+
+
+
+
+
+
 limparImpressora();
+
+
 
 
 
@@ -141,6 +197,10 @@ limparImpressora();
 
 
 
+
+// =====================================
+// CÁLCULO DE CUSTO
+// =====================================
 
 
 function calcularCustoHora(i){
@@ -207,6 +267,11 @@ manutencao
 
 
 
+// =====================================
+// MOSTRAR IMPRESSORAS
+// =====================================
+
+
 function mostrarImpressoras(){
 
 
@@ -228,7 +293,10 @@ return;
 
 
 
+
+
 lista.innerHTML="";
+
 
 
 
@@ -240,6 +308,8 @@ banco.impressoras
 
 
 
+
+
 lista.innerHTML += `
 
 
@@ -247,8 +317,11 @@ lista.innerHTML += `
 
 
 <h3>
+
 🖨 ${i.marca}
+
 ${i.modelo}
+
 </h3>
 
 
@@ -262,6 +335,7 @@ ${i.tipo}
 
 
 
+
 <p>
 
 Horas:
@@ -271,9 +345,10 @@ ${i.horas}h
 
 
 
+
 <p>
 
-Custo hora:
+Custo operacional:
 
 </p>
 
@@ -281,7 +356,7 @@ Custo hora:
 
 <div class="valor">
 
-R$ ${i.custoHora}
+R$ ${i.custoHora}/h
 
 </div>
 
@@ -297,7 +372,6 @@ ${i.manutencoes.length}
 
 
 </div>
-
 
 
 `;
@@ -316,6 +390,11 @@ ${i.manutencoes.length}
 
 
 
+
+
+// =====================================
+// MANUTENÇÃO
+// =====================================
 
 
 function adicionarManutencao(
@@ -338,11 +417,13 @@ i.id === id
 
 
 
+
 if(!impressora){
 
 return;
 
 }
+
 
 
 
@@ -360,8 +441,8 @@ new Date()
 descricao
 
 
-
 });
+
 
 
 
@@ -381,6 +462,12 @@ mostrarImpressoras();
 
 
 
+
+
+
+// =====================================
+// LIMPAR FORM
+// =====================================
 
 
 function limparImpressora(){
@@ -403,18 +490,26 @@ let campos=[
 "horas"
 
 
+
 ];
+
+
 
 
 
 campos.forEach(function(id){
 
 
+
 let campo =
+
 document.getElementById(id);
 
 
+
+
 if(campo){
+
 
 campo.value="";
 
@@ -428,6 +523,8 @@ campo.value="";
 
 
 }
+
+
 
 
 
