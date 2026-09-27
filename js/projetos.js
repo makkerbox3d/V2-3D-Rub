@@ -1,15 +1,15 @@
 /* =====================================
    MakkerBox 3D OS
 
-   PROJETOS 3D V2
+   PROJETOS 3D V3
 
 ===================================== */
 
 
 
-// ===============================
-// CADASTRAR PROJETO
-// ===============================
+// =====================================
+// ADICIONAR PROJETO
+// =====================================
 
 
 function adicionarProjeto(){
@@ -17,6 +17,7 @@ function adicionarProjeto(){
 
 
 let projeto = {
+
 
 
 id:
@@ -44,6 +45,14 @@ arquivo:
 
 document.getElementById(
 "projetoArquivo"
+).value,
+
+
+
+impressora:
+
+document.getElementById(
+"projetoImpressora"
 ).value,
 
 
@@ -90,16 +99,7 @@ status:
 
 document.getElementById(
 "projetoStatus"
-).value,
-
-
-
-impressora:
-
-document.getElementById(
-"projetoImpressora"
-)
-.value
+).value
 
 
 
@@ -109,42 +109,87 @@ document.getElementById(
 
 
 
-// CALCULO MATERIAL
 
-let custoMaterial =
-
-projeto.peso *
-0.15;
+// ===============================
+// BUSCAR MATERIAL
+// ===============================
 
 
+let materialEncontrado =
 
+banco.estoque.find(
 
+p =>
 
-
-// CALCULO MÁQUINA
-
-
-let impressoraEncontrada =
-
-banco.impressoras.find(
-
-i =>
-
-i.modelo === projeto.impressora
+p.nome === projeto.material
 
 );
 
 
 
 
-let custoMaquina = 0;
+
+let custoMaterial = 0;
+
+
+
+
+
+if(materialEncontrado){
+
+
+custoMaterial =
+
+projeto.peso *
+
+Number(
+materialEncontrado.custoUnitario
+);
+
+
+}
+
+
+
+
+
+
+
+// ===============================
+// BUSCAR IMPRESSORA
+// ===============================
+
+
+let impressoraEncontrada =
+
+
+banco.impressoras.find(
+
+
+i =>
+
+i.modelo === projeto.impressora
+
+
+);
+
+
+
+
+
+
+let custoImpressao = 0;
+
+
 
 
 
 if(impressoraEncontrada){
 
 
-custoMaquina =
+
+custoImpressao =
+
 
 Number(
 impressoraEncontrada.custoHora
@@ -164,15 +209,20 @@ projeto.tempo;
 
 
 
+// ===============================
+// CUSTOS FINAIS
+// ===============================
+
+
 projeto.custoMaterial =
 
 custoMaterial.toFixed(2);
 
 
 
-projeto.custoMaquina =
+projeto.custoImpressao =
 
-custoMaquina.toFixed(2);
+custoImpressao.toFixed(2);
 
 
 
@@ -180,13 +230,14 @@ custoMaquina.toFixed(2);
 
 projeto.custoTotal =
 
+
 (
 
-Number(projeto.custoMaterial)
+custoMaterial
 
 +
 
-Number(projeto.custoMaquina)
+custoImpressao
 
 )
 
@@ -197,7 +248,9 @@ Number(projeto.custoMaquina)
 
 
 
+
 projeto.lucro =
+
 
 (
 
@@ -217,9 +270,22 @@ projeto.custoTotal
 
 
 
+projeto.data =
+
+new Date()
+.toLocaleDateString();
+
+
+
+
+
+
+
+
 banco.projetos.push(
 projeto
 );
+
 
 
 
@@ -239,6 +305,8 @@ limparProjeto();
 
 
 
+
+
 }
 
 
@@ -248,10 +316,9 @@ limparProjeto();
 
 
 
-// ===============================
-// MOSTRAR PROJETOS
-// ===============================
-
+// =====================================
+// LISTAR PROJETOS
+// =====================================
 
 
 function mostrarProjetos(){
@@ -266,12 +333,12 @@ document.getElementById(
 
 
 
-
 if(!lista){
 
 return;
 
 }
+
 
 
 
@@ -290,6 +357,7 @@ banco.projetos.forEach(function(p){
 lista.innerHTML += `
 
 
+
 <div class="impressora-card">
 
 
@@ -298,15 +366,22 @@ lista.innerHTML += `
 </h3>
 
 
+
 <p>
 Cliente:
 ${p.cliente}
 </p>
 
 
+
 <p>
-Impressora:
-${p.impressora}
+🖨 ${p.impressora}
+</p>
+
+
+
+<p>
+📦 ${p.material}
 </p>
 
 
@@ -315,6 +390,7 @@ ${p.impressora}
 Status:
 ${p.status}
 </p>
+
 
 
 
@@ -332,12 +408,14 @@ R$ ${p.venda}
 
 
 
+
 <div class="valor">
 
 Lucro:
 R$ ${p.lucro}
 
 </div>
+
 
 
 
@@ -362,16 +440,16 @@ R$ ${p.lucro}
 
 
 
-// ===============================
+// =====================================
 // LIMPAR FORMULÁRIO
-// ===============================
+// =====================================
 
 
 function limparProjeto(){
 
 
 
-let campos=[
+let campos = [
 
 
 "projetoNome",
@@ -391,6 +469,8 @@ let campos=[
 
 
 
+
+
 campos.forEach(function(id){
 
 
@@ -403,10 +483,11 @@ document.getElementById(id);
 
 if(campo){
 
+
 campo.value="";
 
-}
 
+}
 
 
 });
@@ -414,8 +495,6 @@ campo.value="";
 
 
 }
-
-
 
 
 
