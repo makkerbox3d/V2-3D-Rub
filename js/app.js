@@ -1,14 +1,15 @@
-
 /* =====================================
-   MAKkerBOX 3D OS
-   APP CONTROLLER V1
+   MakkerBox 3D OS
+
+   APP CONTROLLER V2
+
 ===================================== */
 
 
 
-// ===============================
-// TROCA DE TELAS
-// ===============================
+// =====================================
+// NAVEGAÇÃO ENTRE TELAS
+// =====================================
 
 
 function mostrarTela(tela){
@@ -17,25 +18,29 @@ function mostrarTela(tela){
     let telas = document.querySelectorAll(".tela");
 
 
+
     telas.forEach(function(item){
 
 
-        item.classList.add("escondida");
+        item.classList.add(
+            "escondida"
+        );
 
 
     });
 
 
 
-    let selecionada = 
+
+    let abrir =
     document.getElementById(tela);
 
 
 
-    if(selecionada){
+    if(abrir){
 
 
-        selecionada.classList.remove(
+        abrir.classList.remove(
             "escondida"
         );
 
@@ -50,9 +55,9 @@ function mostrarTela(tela){
 
 
 
-// ===============================
+// =====================================
 // CARREGAR EMPRESA
-// ===============================
+// =====================================
 
 
 function carregarEmpresa(){
@@ -67,7 +72,8 @@ function carregarEmpresa(){
 
 
 
-    let nome = 
+
+    let nome =
     document.getElementById(
         "nomeEmpresa"
     );
@@ -87,14 +93,20 @@ function carregarEmpresa(){
 
 
 
+    // COR PRINCIPAL
+
+
     if(banco.empresa.corPrincipal){
 
 
         document.documentElement
         .style
         .setProperty(
+
             "--primary",
+
             banco.empresa.corPrincipal
+
         );
 
 
@@ -102,25 +114,11 @@ function carregarEmpresa(){
 
 
 
-
-    if(banco.empresa.corSecundaria){
-
-
-        document.documentElement
-        .style
-        .setProperty(
-            "--secondary",
-            banco.empresa.corSecundaria
-        );
-
-
-    }
-
-
-
+    // LOGO
 
 
     if(banco.empresa.logo){
+
 
 
         let logo =
@@ -129,13 +127,18 @@ function carregarEmpresa(){
         );
 
 
+
         if(logo){
+
 
             logo.src =
             banco.empresa.logo;
 
+
+
             logo.style.display =
             "block";
+
 
         }
 
@@ -152,9 +155,9 @@ function carregarEmpresa(){
 
 
 
-// ===============================
-// SALVAR EMPRESA
-// ===============================
+// =====================================
+// SALVAR CONFIGURAÇÃO EMPRESA
+// =====================================
 
 
 function salvarEmpresa(){
@@ -178,10 +181,13 @@ function salvarEmpresa(){
 
 
 
+
     if(nome){
+
 
         banco.empresa.nome =
         nome;
+
 
     }
 
@@ -190,10 +196,13 @@ function salvarEmpresa(){
 
     if(cor){
 
+
         banco.empresa.corPrincipal =
         cor;
 
+
     }
+
 
 
 
@@ -211,6 +220,7 @@ function salvarEmpresa(){
     );
 
 
+
 }
 
 
@@ -219,16 +229,20 @@ function salvarEmpresa(){
 
 
 
-// ===============================
+
+// =====================================
 // ATUALIZAR DASHBOARD
-// ===============================
+// =====================================
 
 
 function atualizarDashboard(){
 
 
 
-    let impressoras =
+    // IMPRESSORAS
+
+
+    let totalImp =
 
     document.getElementById(
         "totalImpressoras"
@@ -236,12 +250,38 @@ function atualizarDashboard(){
 
 
 
-    if(impressoras){
+    if(totalImp){
 
 
-        impressoras.innerHTML =
+        totalImp.innerHTML =
 
         banco.impressoras.length;
+
+
+    }
+
+
+
+
+
+    // ESTOQUE
+
+
+
+    let totalEstoque =
+
+    document.getElementById(
+        "totalEstoque"
+    );
+
+
+
+    if(totalEstoque){
+
+
+        totalEstoque.innerHTML =
+
+        banco.estoque.length;
 
 
     }
@@ -255,13 +295,17 @@ function atualizarDashboard(){
 
 
 
-// ===============================
+
+// =====================================
 // INICIALIZAÇÃO
-// ===============================
+// =====================================
 
 
+window.addEventListener(
 
-window.onload=function(){
+"load",
+
+function(){
 
 
 
@@ -277,4 +321,11 @@ window.onload=function(){
 
 
 
-};
+
+    mostrarTela(
+        "dashboard"
+    );
+
+
+
+});
