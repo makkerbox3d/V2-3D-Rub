@@ -20,7 +20,7 @@
 <div class="app">
 
 
-<!-- SIDEBAR -->
+<!-- MENU LATERAL -->
 
 <aside class="sidebar">
 
@@ -41,7 +41,7 @@ MakkerBox 3D OS
 
 
 <p>
-Gestão Maker
+Gestão Inteligente 3D
 </p>
 
 
@@ -57,9 +57,11 @@ Gestão Maker
 </button>
 
 
+
 <button onclick="mostrarTela('projetos')">
 🧊 Projetos 3D
 </button>
+
 
 
 <button onclick="mostrarTela('impressoras')">
@@ -67,9 +69,11 @@ Gestão Maker
 </button>
 
 
+
 <button onclick="mostrarTela('estoque')">
 📦 Estoque
 </button>
+
 
 
 <button onclick="mostrarTela('pintura')">
@@ -77,14 +81,17 @@ Gestão Maker
 </button>
 
 
+
 <button onclick="mostrarTela('financeiro')">
 💰 Financeiro
 </button>
 
 
+
 <button onclick="mostrarTela('clientes')">
 👥 Clientes
 </button>
+
 
 
 <button onclick="mostrarTela('config')">
@@ -102,8 +109,9 @@ Gestão Maker
 
 
 
-<!-- ÁREA PRINCIPAL -->
 
+
+<!-- CONTEÚDO -->
 
 <main class="content">
 
@@ -128,6 +136,7 @@ Dashboard
 <div class="cards">
 
 
+
 <div class="card">
 
 <h3>
@@ -137,23 +146,6 @@ Dashboard
 <strong id="totalImpressoras">
 0
 </strong>
-
-
-</div>
-
-
-
-
-<div class="card">
-
-<h3>
-📦 Estoque
-</h3>
-
-<strong id="totalEstoque">
-0
-</strong>
-
 
 </div>
 
@@ -171,6 +163,21 @@ Dashboard
 0
 </strong>
 
+</div>
+
+
+
+
+
+<div class="card">
+
+<h3>
+📦 Estoque
+</h3>
+
+<strong id="totalEstoque">
+0
+</strong>
 
 </div>
 
@@ -181,34 +188,49 @@ Dashboard
 <div class="card">
 
 <h3>
-💰 Lucro
+💰 Valor produzido
 </h3>
 
-<strong>
+<strong id="valorProducao">
 R$ 0
 </strong>
 
-
 </div>
 
 
 
 </div>
+
+
+
+
+
+<div class="card" style="margin-top:30px">
+
+
+<h3>
+🚀 Status da Produção
+</h3>
+
+
+<p>
+Nenhuma produção em andamento.
+</p>
+
+
+</div>
+
 
 
 
 </section>
 
+<!-- =====================================
+     PROJETOS 3D
+===================================== -->
 
 
-
-
-
-
-<!-- PROJETOS 3D -->
-
-
-<section 
+<section
 id="projetos"
 class="tela escondida">
 
@@ -216,6 +238,7 @@ class="tela escondida">
 <h1>
 🧊 Projetos 3D
 </h1>
+
 
 
 
@@ -243,25 +266,31 @@ placeholder="Arquivo Blender / STL"
 
 
 
-<select id="projetoMaterial">
 
 
-<option>
-Resina
-</option>
+<select id="projetoImpressora">
 
-
-<option>
-PLA
-</option>
-
-
-<option>
-PETG
+<option value="">
+Selecione a impressora
 </option>
 
 
 </select>
+
+
+
+
+
+<select id="projetoMaterial">
+
+
+<option value="">
+Selecione material
+</option>
+
+
+</select>
+
 
 
 
@@ -283,11 +312,14 @@ placeholder="Tempo impressão (horas)"
 
 
 
+
 <input
 id="projetoVenda"
 type="number"
 placeholder="Preço de venda"
 >
+
+
 
 
 
@@ -310,6 +342,11 @@ placeholder="Preço de venda"
 
 
 <option>
+🧽 Acabamento
+</option>
+
+
+<option>
 🎨 Pintura
 </option>
 
@@ -321,6 +358,9 @@ placeholder="Preço de venda"
 
 
 </select>
+
+
+
 
 
 
@@ -337,6 +377,7 @@ Cadastrar Projeto
 
 
 
+
 <div id="listaProjetos">
 
 </div>
@@ -349,10 +390,14 @@ Cadastrar Projeto
 
 
 
-<!-- IMPRESSORAS -->
 
 
-<section 
+<!-- =====================================
+     IMPRESSORAS
+===================================== -->
+
+
+<section
 id="impressoras"
 class="tela escondida">
 
@@ -362,17 +407,32 @@ class="tela escondida">
 </h1>
 
 
+
+
+
 <div class="form">
 
 
-<input 
+
+<input
+
 id="marca"
-placeholder="Marca">
+
+placeholder="Marca"
+
+>
 
 
-<input 
+
+<input
+
 id="modelo"
-placeholder="Modelo">
+
+placeholder="Modelo"
+
+>
+
+
 
 
 <select id="tipo">
@@ -393,31 +453,68 @@ MSLA
 </option>
 
 
+<option>
+SLS
+</option>
+
+
 </select>
 
 
-<input 
+
+
+
+<input
+
 id="valor"
+
 type="number"
-placeholder="Valor da impressora">
+
+placeholder="Valor da impressora"
+
+>
 
 
-<input 
+
+
+<input
+
 id="potencia"
+
 type="number"
-placeholder="Potência Watts">
+
+placeholder="Potência Watts"
+
+>
 
 
-<input 
+
+
+<input
+
 id="kwh"
+
 type="number"
-placeholder="Valor kWh">
+
+placeholder="Valor kWh"
+
+>
 
 
-<input 
+
+
+<input
+
 id="horas"
+
 type="number"
-placeholder="Horas trabalhadas">
+
+placeholder="Horas trabalhadas"
+
+>
+
+
+
 
 
 <button onclick="adicionarImpressora()">
@@ -427,7 +524,12 @@ Cadastrar Impressora
 </button>
 
 
+
+
 </div>
+
+
+
 
 
 <div id="listaImpressoras">
@@ -435,11 +537,17 @@ Cadastrar Impressora
 </div>
 
 
+
+
+
 </section>
 
-<!-- ESTOQUE -->
+<!-- =====================================
+     ESTOQUE
+===================================== -->
 
-<section 
+
+<section
 id="estoque"
 class="tela escondida">
 
@@ -449,12 +557,18 @@ class="tela escondida">
 </h1>
 
 
+
+
 <div class="form">
 
 
+
 <input
+
 id="produtoNome"
-placeholder="Nome do produto"
+
+placeholder="Nome do material"
+
 >
 
 
@@ -487,15 +601,23 @@ Ferramenta
 </option>
 
 
+
 </select>
 
 
 
+
+
 <input
+
 id="quantidade"
+
 type="number"
+
 placeholder="Quantidade"
+
 >
+
 
 
 
@@ -522,24 +644,34 @@ unidade
 </option>
 
 
+
 </select>
 
 
 
 
+
 <input
+
 id="valorProduto"
+
 type="number"
+
 placeholder="Valor pago"
+
 >
 
 
 
 
 <input
+
 id="estoqueMinimo"
+
 type="number"
+
 placeholder="Estoque mínimo"
+
 >
 
 
@@ -557,6 +689,8 @@ Cadastrar Material
 
 
 
+
+
 <div id="listaEstoque">
 
 </div>
@@ -571,7 +705,9 @@ Cadastrar Material
 
 
 
-<!-- CONFIGURAÇÃO -->
+<!-- =====================================
+     CONFIGURAÇÃO
+===================================== -->
 
 
 <section
@@ -580,7 +716,7 @@ class="tela escondida">
 
 
 <h1>
-⚙ Configuração da Empresa
+⚙ Configuração
 </h1>
 
 
@@ -589,16 +725,24 @@ class="tela escondida">
 
 
 <input
+
 id="novoNome"
+
 placeholder="Nome da empresa"
+
 >
+
 
 
 
 <input
+
 id="novaCor"
+
 type="color"
+
 >
+
 
 
 
@@ -609,7 +753,9 @@ Salvar Configuração
 </button>
 
 
+
 </div>
+
 
 
 </section>
@@ -620,7 +766,10 @@ Salvar Configuração
 
 
 
-<!-- PINTURA -->
+
+<!-- =====================================
+     PINTURA
+===================================== -->
 
 
 <section
@@ -637,11 +786,12 @@ class="tela escondida">
 
 
 <p>
-Módulo para aerógrafo, tintas, compressor e acabamento.
+Controle de aerógrafo, compressor, tintas e processos de acabamento.
 </p>
 
 
 </div>
+
 
 
 </section>
@@ -652,8 +802,9 @@ Módulo para aerógrafo, tintas, compressor e acabamento.
 
 
 
-
-<!-- FINANCEIRO -->
+<!-- =====================================
+     FINANCEIRO
+===================================== -->
 
 
 <section
@@ -666,15 +817,17 @@ class="tela escondida">
 </h1>
 
 
+
 <div class="card">
 
 
 <p>
-Controle de custos, vendas e lucro.
+Custos, vendas, lucro e relatórios.
 </p>
 
 
 </div>
+
 
 
 </section>
@@ -685,7 +838,9 @@ Controle de custos, vendas e lucro.
 
 
 
-<!-- CLIENTES -->
+<!-- =====================================
+     CLIENTES
+===================================== -->
 
 
 <section
@@ -698,6 +853,7 @@ class="tela escondida">
 </h1>
 
 
+
 <div class="card">
 
 
@@ -707,6 +863,7 @@ Cadastro de clientes e pedidos.
 
 
 </div>
+
 
 
 </section>
@@ -727,26 +884,23 @@ Cadastro de clientes e pedidos.
 
 
 
-<!-- SCRIPTS -->
+<!-- =====================================
+     SCRIPTS
+===================================== -->
 
 
 <script src="js/database.js"></script>
 
-
 <script src="js/impressoras.js"></script>
-
 
 <script src="js/estoque.js"></script>
 
-
 <script src="js/projetos.js"></script>
-
 
 <script src="js/app.js"></script>
 
 
 
 </body>
-
 
 </html>
