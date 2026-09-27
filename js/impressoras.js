@@ -1,122 +1,135 @@
 /* =====================================
-   MAKkerBOX 3D OS
+   MakkerBox 3D OS
 
-   MÓDULO IMPRESSORAS 3D V1
+   IMPRESSORAS V2
+
 ===================================== */
 
-
-
-// ===============================
-// ADICIONAR IMPRESSORA
-// ===============================
 
 
 function adicionarImpressora(){
 
 
 
-    let impressora = {
+let impressora = {
 
 
-        id: gerarID(),
-
-
-        marca:
-        document.getElementById(
-            "marca"
-        ).value,
-
-
-        modelo:
-        document.getElementById(
-            "modelo"
-        ).value,
+id:
+gerarID(),
 
 
 
-        tipo:
-        document.getElementById(
-            "tipo"
-        ).value,
+marca:
+
+document.getElementById(
+"marca"
+).value,
 
 
 
-        valor:
-        Number(
-        document.getElementById(
-            "valor"
-        ).value
-        ),
+modelo:
+
+document.getElementById(
+"modelo"
+).value,
 
 
 
-        potencia:
-        Number(
-        document.getElementById(
-            "potencia"
-        ).value
-        ),
+tipo:
+
+document.getElementById(
+"tipo"
+).value,
 
 
 
-        kwh:
-        Number(
-        document.getElementById(
-            "kwh"
-        ).value
-        ),
+valor:
+
+Number(
+document.getElementById(
+"valor"
+).value
+),
 
 
 
-        horas:
-        Number(
-        document.getElementById(
-            "horas"
-        ).value
-        ),
+potencia:
+
+Number(
+document.getElementById(
+"potencia"
+).value
+),
 
 
 
-        dataCadastro:
-        new Date()
-        .toLocaleDateString()
+kwh:
 
-    };
-
-
-
-
-
-    impressora.custoHora =
-
-    calcularCustoHora(
-        impressora
-    );
+Number(
+document.getElementById(
+"kwh"
+).value
+),
 
 
 
+horas:
 
-
-    banco.impressoras.push(
-        impressora
-    );
-
-
-
-    salvarBanco();
-
-
-
-    mostrarImpressoras();
+Number(
+document.getElementById(
+"horas"
+).value
+),
 
 
 
-    atualizarDashboard();
+manutencoes:[],
+
+
+
+data:
+
+new Date()
+.toLocaleDateString()
+
+
+
+};
 
 
 
 
-    limparFormulario();
+
+impressora.custoHora =
+
+calcularCustoHora(
+impressora
+);
+
+
+
+
+
+
+banco.impressoras.push(
+impressora
+);
+
+
+
+salvarBanco();
+
+
+
+mostrarImpressoras();
+
+
+
+atualizarDashboard();
+
+
+
+limparImpressora();
 
 
 
@@ -128,58 +141,59 @@ function adicionarImpressora(){
 
 
 
-// ===============================
-// CÁLCULO DE CUSTO
-// ===============================
 
 
 function calcularCustoHora(i){
 
 
 
-    /*
-    
-    Considerando:
-
-    Vida útil:
-    4000 horas
-
-    Depreciação:
-    valor dividido pela vida útil
-
-    Energia:
-    potência convertida para KW
-
-    */
-
-
-    let depreciacao =
-
-    i.valor / 4000;
+let vidaUtil = 4000;
 
 
 
+let depreciacao =
 
-    let energia =
-
-    (i.potencia / 1000)
-    *
-    i.kwh;
+i.valor /
+vidaUtil;
 
 
 
 
 
-    let total =
+let energia =
 
-    depreciacao +
-    energia;
-
-
-
+(i.potencia / 1000)
+*
+i.kwh;
 
 
-    return total.toFixed(2);
+
+
+
+let manutencao =
+
+0.10;
+
+
+
+
+
+
+return (
+
+depreciacao
+
++
+
+energia
+
++
+
+manutencao
+
+)
+
+.toFixed(2);
 
 
 
@@ -191,104 +205,106 @@ function calcularCustoHora(i){
 
 
 
-// ===============================
-// MOSTRAR IMPRESSORAS
-// ===============================
 
 
 function mostrarImpressoras(){
 
 
 
-    let lista =
+let lista =
 
-    document.getElementById(
-        "listaImpressoras"
-    );
-
-
-
-    if(!lista){
-
-        return;
-
-    }
+document.getElementById(
+"listaImpressoras"
+);
 
 
 
 
+if(!lista){
 
-    lista.innerHTML="";
+return;
 
+}
+
+
+
+lista.innerHTML="";
 
 
 
 
 
-    banco.impressoras
-    .forEach(function(i){
+
+banco.impressoras
+.forEach(function(i){
 
 
 
+lista.innerHTML += `
 
 
-        lista.innerHTML += `
+<div class="impressora-card">
 
 
-
-        <div class="impressora-card">
-
-
-        <h3>
-        🖨 ${i.marca}
-        ${i.modelo}
-        </h3>
+<h3>
+🖨 ${i.marca}
+${i.modelo}
+</h3>
 
 
 
-        <p>
-        Tipo:
-        ${i.tipo}
-        </p>
+<p>
+
+Tipo:
+${i.tipo}
+
+</p>
 
 
 
-        <p>
-        Potência:
-        ${i.potencia}W
-        </p>
+<p>
+
+Horas:
+${i.horas}h
+
+</p>
 
 
 
-        <p>
-        Horas:
-        ${i.horas}h
-        </p>
+<p>
+
+Custo hora:
+
+</p>
 
 
 
-        <p>
-        Custo por hora:
-        </p>
+<div class="valor">
 
+R$ ${i.custoHora}
 
-        <div class="valor">
-
-        R$ ${i.custoHora}
-
-        </div>
+</div>
 
 
 
-        </div>
+<p>
+
+Manutenções:
+${i.manutencoes.length}
+
+</p>
 
 
 
-        `;
+</div>
 
 
 
-    });
+`;
+
+
+
+});
 
 
 
@@ -299,16 +315,80 @@ function mostrarImpressoras(){
 
 
 
-// ===============================
-// LIMPAR FORMULÁRIO
-// ===============================
-
-
-function limparFormulario(){
 
 
 
-let campos = [
+function adicionarManutencao(
+id,
+descricao
+){
+
+
+
+let impressora =
+
+banco.impressoras.find(
+
+i =>
+
+i.id === id
+
+);
+
+
+
+
+if(!impressora){
+
+return;
+
+}
+
+
+
+
+
+impressora.manutencoes.push({
+
+
+data:
+
+new Date()
+.toLocaleDateString(),
+
+
+descricao
+
+
+
+});
+
+
+
+
+salvarBanco();
+
+
+
+mostrarImpressoras();
+
+
+
+}
+
+
+
+
+
+
+
+
+function limparImpressora(){
+
+
+
+let campos=[
+
 
 "marca",
 
@@ -322,9 +402,8 @@ let campos = [
 
 "horas"
 
+
 ];
-
-
 
 
 
@@ -335,12 +414,13 @@ let campo =
 document.getElementById(id);
 
 
-
 if(campo){
 
 campo.value="";
 
+
 }
+
 
 
 });
@@ -353,13 +433,11 @@ campo.value="";
 
 
 
-// ===============================
-// CARREGAR AO ABRIR
-// ===============================
-
 
 window.addEventListener(
+
 "load",
+
 function(){
 
 
