@@ -1,54 +1,71 @@
 /* =====================================
-   MAKkerBOX 3D OS
-   DATABASE V1
+   MakkerBox 3D OS
 
-   Banco local da aplicação
+   DATABASE V2
+
 ===================================== */
 
 
 let banco = {
 
-    empresa: {
 
-        nome: "MakkerBox 3D OS",
-
-        logo: "",
-
-        corPrincipal: "#2563eb",
-
-        corSecundaria: "#00e5ff",
-
-        tema: "dark"
-
-    },
+empresa:{
 
 
-    impressoras: [],
+nome:"MakkerBox 3D OS",
 
 
-    projetos: [],
+logo:"",
 
 
-    estoque: [],
+corPrincipal:"#2563eb",
 
 
-    equipamentos: [],
+corSecundaria:"#00e5ff",
 
 
-    materiais: [],
+tema:"dark"
 
 
-    clientes: [],
+},
 
 
-    financeiro: {
 
 
-        vendas: [],
 
-        custos: []
+impressoras:[],
 
-    }
+
+estoque:[],
+
+
+projetos:[],
+
+
+pintura:[],
+
+
+equipamentos:[],
+
+
+clientes:[],
+
+
+orcamentos:[],
+
+
+
+financeiro:{
+
+
+vendas:[],
+
+
+custos:[]
+
+
+}
+
 
 
 };
@@ -57,21 +74,19 @@ let banco = {
 
 
 
-// ===============================
-// SALVAR BANCO
-// ===============================
 
 
 function salvarBanco(){
 
 
-    localStorage.setItem(
 
-        "MakkerBoxDB",
+localStorage.setItem(
 
-        JSON.stringify(banco)
+"MakkerBoxDB",
 
-    );
+JSON.stringify(banco)
+
+);
 
 
 }
@@ -80,29 +95,31 @@ function salvarBanco(){
 
 
 
-// ===============================
-// CARREGAR BANCO
-// ===============================
 
 
 function carregarBanco(){
 
 
-    let dados =
 
-    localStorage.getItem(
-        "MakkerBoxDB"
-    );
+let dados =
 
-
-
-    if(dados){
+localStorage.getItem(
+"MakkerBoxDB"
+);
 
 
-        banco = JSON.parse(dados);
 
 
-    }
+if(dados){
+
+
+
+banco =
+JSON.parse(dados);
+
+
+
+}
 
 
 
@@ -112,37 +129,13 @@ function carregarBanco(){
 
 
 
-// ===============================
-// RESETAR BANCO
-// ===============================
-
-
-function resetarBanco(){
-
-
-    localStorage.removeItem(
-        "MakkerBoxDB"
-    );
-
-
-    location.reload();
-
-
-}
-
-
-
-
-
-// ===============================
-// GERAR ID ÚNICO
-// ===============================
 
 
 function gerarID(){
 
 
-    return Date.now();
+return Date.now();
+
 
 }
 
@@ -150,6 +143,23 @@ function gerarID(){
 
 
 
-// Inicializa
+
+function resetarBanco(){
+
+
+localStorage.removeItem(
+"MakkerBoxDB"
+);
+
+
+location.reload();
+
+
+}
+
+
+
+
+
 
 carregarBanco();
