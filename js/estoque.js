@@ -1,14 +1,17 @@
 /* =====================================
-   MAKkerBOX 3D OS
+   MakkerBox 3D OS
 
-   MÓDULO ESTOQUE V1
+   ESTOQUE V2
+
 ===================================== */
 
 
 
-// ===============================
-// CADASTRAR PRODUTO
-// ===============================
+
+
+// =====================================
+// CADASTRAR MATERIAL
+// =====================================
 
 
 function adicionarEstoque(){
@@ -73,7 +76,11 @@ Number(
 document.getElementById(
 "estoqueMinimo"
 ).value
-)
+),
+
+
+
+consumo: []
 
 
 
@@ -83,12 +90,22 @@ document.getElementById(
 
 
 
+
+// custo por unidade
+
+
 produto.custoUnitario =
+
 
 (
 produto.valor /
+
 produto.quantidade
-).toFixed(3);
+
+)
+
+.toFixed(4);
+
 
 
 
@@ -109,7 +126,13 @@ mostrarEstoque();
 
 
 
+atualizarDashboard();
+
+
+
 limparEstoque();
+
+
 
 }
 
@@ -117,9 +140,13 @@ limparEstoque();
 
 
 
-// ===============================
+
+
+
+
+// =====================================
 // LISTAR ESTOQUE
-// ===============================
+// =====================================
 
 
 function mostrarEstoque(){
@@ -148,8 +175,9 @@ lista.innerHTML="";
 
 
 
-banco.estoque
-.forEach(function(p){
+
+
+banco.estoque.forEach(function(p){
 
 
 
@@ -157,14 +185,20 @@ let alerta="";
 
 
 
+
 if(
 p.quantidade <= p.minimo
 ){
 
+
 alerta =
+
 "⚠ Estoque baixo";
 
+
 }
+
+
 
 
 
@@ -193,15 +227,12 @@ ${p.unidade}
 </p>
 
 
-<p>
-Valor:
-R$ ${p.valor}
-</p>
-
 
 <p>
 Custo unidade:
+
 R$ ${p.custoUnitario}
+
 </p>
 
 
@@ -213,11 +244,13 @@ ${alerta}
 </strong>
 
 
+
 </div>
 
 
 
 `;
+
 
 
 
@@ -233,9 +266,104 @@ ${alerta}
 
 
 
-// ===============================
-// LIMPAR CAMPOS
-// ===============================
+
+
+// =====================================
+// BAIXAR MATERIAL
+// =====================================
+
+
+function consumirMaterial(
+nome,
+quantidade,
+projeto
+){
+
+
+
+let material =
+
+banco.estoque.find(
+
+m =>
+
+m.nome === nome
+
+);
+
+
+
+
+
+if(!material){
+
+return false;
+
+}
+
+
+
+
+
+
+material.quantidade -= quantidade;
+
+
+
+
+
+
+
+material.consumo.push({
+
+
+data:
+
+new Date()
+.toLocaleDateString(),
+
+
+
+quantidade,
+
+
+projeto
+
+
+
+});
+
+
+
+
+
+
+
+salvarBanco();
+
+
+
+mostrarEstoque();
+
+
+
+return true;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+// =====================================
+// LIMPAR FORMULÁRIO
+// =====================================
 
 
 function limparEstoque(){
@@ -258,10 +386,12 @@ let campos=[
 
 
 
+
 campos.forEach(function(id){
 
 
 let campo =
+
 document.getElementById(id);
 
 
@@ -283,6 +413,8 @@ campo.value="";
 
 
 
+
+
 window.addEventListener(
 
 "load",
@@ -293,6 +425,4 @@ function(){
 mostrarEstoque();
 
 
-}
-
-);
+});
