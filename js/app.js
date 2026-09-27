@@ -1,31 +1,29 @@
 /* =====================================
    MakkerBox 3D OS
 
-   APP CONTROLLER V3
+   APP CONTROLLER V4
 
 ===================================== */
 
 
 
 // =====================================
-// ABRIR TELAS
+// NAVEGAÇÃO
 // =====================================
 
 
 function mostrarTela(tela){
 
 
-
-    let telas = document.querySelectorAll(
-        ".tela"
-    );
+    let telas =
+    document.querySelectorAll(".tela");
 
 
 
-    telas.forEach(function(secao){
+    telas.forEach(function(item){
 
 
-        secao.classList.add(
+        item.classList.add(
             "escondida"
         );
 
@@ -34,8 +32,7 @@ function mostrarTela(tela){
 
 
 
-
-    let abrir = 
+    let abrir =
     document.getElementById(tela);
 
 
@@ -59,7 +56,6 @@ function mostrarTela(tela){
 
 
 
-
 // =====================================
 // CARREGAR EMPRESA
 // =====================================
@@ -74,6 +70,8 @@ function carregarEmpresa(){
         return;
 
     }
+
+
 
 
 
@@ -97,9 +95,8 @@ function carregarEmpresa(){
 
 
 
-    if(
-    banco.empresa.corPrincipal
-    ){
+
+    if(banco.empresa.corPrincipal){
 
 
 
@@ -107,9 +104,9 @@ function carregarEmpresa(){
         .style
         .setProperty(
 
-            "--primary",
+        "--primary",
 
-            banco.empresa.corPrincipal
+        banco.empresa.corPrincipal
 
         );
 
@@ -121,9 +118,7 @@ function carregarEmpresa(){
 
 
 
-    if(
-    banco.empresa.logo
-    ){
+    if(banco.empresa.logo){
 
 
 
@@ -141,16 +136,10 @@ function carregarEmpresa(){
             banco.empresa.logo;
 
 
-
-            logo.style.display =
-            "block";
-
-
         }
 
 
     }
-
 
 
 
@@ -163,7 +152,7 @@ function carregarEmpresa(){
 
 
 // =====================================
-// SALVAR EMPRESA
+// CONFIGURAÇÃO EMPRESA
 // =====================================
 
 
@@ -219,8 +208,6 @@ function salvarEmpresa(){
 
 
 
-
-
     salvarBanco();
 
 
@@ -229,10 +216,142 @@ function salvarEmpresa(){
 
 
 
+}
 
-    alert(
-        "Configuração salva!"
+
+
+
+
+
+
+
+
+// =====================================
+// CARREGAR IMPRESSORAS NO PROJETO
+// =====================================
+
+
+function carregarImpressorasProjeto(){
+
+
+
+    let select =
+
+    document.getElementById(
+        "projetoImpressora"
     );
+
+
+
+    if(!select){
+
+        return;
+
+    }
+
+
+
+
+    select.innerHTML = `
+
+<option value="">
+Selecione a impressora
+</option>
+
+`;
+
+
+
+
+
+
+    banco.impressoras.forEach(function(i){
+
+
+
+        select.innerHTML += `
+
+<option value="${i.modelo}">
+
+${i.marca}
+${i.modelo}
+
+</option>
+
+`;
+
+
+
+    });
+
+
+
+}
+
+
+
+
+
+
+
+
+
+// =====================================
+// CARREGAR MATERIAIS NO PROJETO
+// =====================================
+
+
+function carregarMateriaisProjeto(){
+
+
+
+    let select =
+
+    document.getElementById(
+        "projetoMaterial"
+    );
+
+
+
+    if(!select){
+
+        return;
+
+    }
+
+
+
+
+
+    select.innerHTML = `
+
+<option value="">
+Selecione material
+</option>
+
+`;
+
+
+
+
+
+    banco.estoque.forEach(function(p){
+
+
+
+        select.innerHTML += `
+
+<option value="${p.nome}">
+
+${p.nome}
+
+</option>
+
+`;
+
+
+
+    });
 
 
 
@@ -255,78 +374,110 @@ function atualizarDashboard(){
 
 
 
-    // Impressoras
+let imp =
 
-
-    let impressoras =
-
-    document.getElementById(
-        "totalImpressoras"
-    );
+document.getElementById(
+"totalImpressoras"
+);
 
 
 
-    if(impressoras){
+if(imp){
 
 
-        impressoras.innerHTML =
+imp.innerHTML =
+banco.impressoras.length;
 
-        banco.impressoras.length;
 
-
-    }
+}
 
 
 
 
 
 
-    // Estoque
+let est =
 
-
-    let estoque =
-
-    document.getElementById(
-        "totalEstoque"
-    );
+document.getElementById(
+"totalEstoque"
+);
 
 
 
-    if(estoque){
+if(est){
 
 
-        estoque.innerHTML =
+est.innerHTML =
+banco.estoque.length;
 
-        banco.estoque.length;
 
-
-    }
+}
 
 
 
 
 
 
-    // Projetos
 
+let proj =
 
-    let projetos =
-
-    document.getElementById(
-        "totalProjetos"
-    );
+document.getElementById(
+"totalProjetos"
+);
 
 
 
-    if(projetos){
+if(proj){
 
 
-        projetos.innerHTML =
+proj.innerHTML =
+banco.projetos.length;
 
-        banco.projetos.length;
+
+}
 
 
-    }
+
+
+
+
+
+let valor = 0;
+
+
+
+banco.projetos.forEach(function(p){
+
+
+valor +=
+Number(p.venda || 0);
+
+
+});
+
+
+
+
+
+let valorTela =
+
+document.getElementById(
+"valorProducao"
+);
+
+
+
+if(valorTela){
+
+
+valorTela.innerHTML =
+
+"R$ " +
+valor.toFixed(2);
+
+
+
+}
 
 
 
@@ -339,8 +490,9 @@ function atualizarDashboard(){
 
 
 
+
 // =====================================
-// INICIAR SISTEMA
+// INICIALIZAÇÃO
 // =====================================
 
 
@@ -352,22 +504,32 @@ function(){
 
 
 
-    carregarBanco();
+carregarBanco();
 
 
 
-    carregarEmpresa();
+carregarEmpresa();
 
 
 
-    atualizarDashboard();
+carregarImpressorasProjeto();
 
 
 
-    mostrarTela(
-        "dashboard"
-    );
+carregarMateriaisProjeto();
 
 
 
-});
+atualizarDashboard();
+
+
+
+mostrarTela(
+"dashboard"
+);
+
+
+
+}
+
+);
