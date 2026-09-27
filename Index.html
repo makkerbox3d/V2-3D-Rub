@@ -1,1 +1,631 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>MakerOS 3D</title>
+
+<style>
+
+:root{
+    --primary:#6c5ce7;
+    --secondary:#00cec9;
+    --bg:#111;
+    --card:#1d1d1d;
+    --text:#fff;
+}
+
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+
+body{
+    background:var(--bg);
+    color:var(--text);
+}
+
+
+/* MENU */
+
+.sidebar{
+
+    width:260px;
+    height:100vh;
+    position:fixed;
+    left:0;
+    top:0;
+
+    background:#090909;
+    border-right:1px solid #333;
+
+    padding:20px;
+
+}
+
+
+.logo-area{
+
+    text-align:center;
+    margin-bottom:30px;
+
+}
+
+
+.logo-area img{
+
+    width:80px;
+    height:80px;
+    border-radius:50%;
+    object-fit:cover;
+
+}
+
+
+.logo-area h2{
+
+    margin-top:10px;
+    color:var(--secondary);
+
+}
+
+
+
+.menu button{
+
+    width:100%;
+    padding:14px;
+    margin-bottom:10px;
+
+    border:none;
+    background:#222;
+
+    color:white;
+    cursor:pointer;
+
+    border-radius:8px;
+
+    text-align:left;
+
+}
+
+
+
+.menu button:hover{
+
+    background:var(--primary);
+
+}
+
+
+/* CONTEUDO */
+
+
+.content{
+
+    margin-left:260px;
+    padding:30px;
+
+}
+
+
+
+header{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+}
+
+
+
+header h1{
+
+    font-size:30px;
+
+}
+
+
+
+.cards{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(220px,1fr));
+
+    gap:20px;
+
+    margin-top:30px;
+
+}
+
+
+.card{
+
+    background:var(--card);
+
+    padding:25px;
+
+    border-radius:15px;
+
+    border:1px solid #333;
+
+}
+
+
+.card h3{
+
+    color:var(--secondary);
+
+    margin-bottom:10px;
+
+}
+
+
+
+.card span{
+
+    font-size:30px;
+
+    font-weight:bold;
+
+}
+
+
+
+
+.config{
+
+    margin-top:40px;
+
+    background:var(--card);
+
+    padding:25px;
+
+    border-radius:15px;
+
+}
+
+
+
+input, select{
+
+    width:100%;
+
+    padding:12px;
+
+    margin-top:8px;
+
+    margin-bottom:15px;
+
+    background:#111;
+
+    color:white;
+
+    border:1px solid #444;
+
+    border-radius:8px;
+
+}
+
+
+
+label{
+
+    font-size:14px;
+
+}
+
+
+
+button.salvar{
+
+    background:var(--primary);
+
+    color:white;
+
+    border:none;
+
+    padding:15px;
+
+    width:100%;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+}
+
+
+
+@media(max-width:800px){
+
+.sidebar{
+
+position:relative;
+
+width:100%;
+
+height:auto;
+
+}
+
+
+.content{
+
+margin-left:0;
+
+}
+
+
+}
+
+</style>
+
+
+</head>
+
+
+<body>
+
+
+<div class="sidebar">
+
+
+<div class="logo-area">
+
+<img id="logoEmpresa"
+src="https://via.placeholder.com/150">
+
+
+<h2 id="nomeEmpresa">
+MakerOS 3D
+</h2>
+
+
+</div>
+
+
+<div class="menu">
+
+
+<button>🏠 Dashboard</button>
+
+<button>🧊 Projetos 3D</button>
+
+<button>🖨 Impressoras</button>
+
+<button>📦 Estoque</button>
+
+<button>🎨 Pintura</button>
+
+<button>💰 Financeiro</button>
+
+<button>👥 Clientes</button>
+
+<button>⚙ Configuração</button>
+
+
+</div>
+
+
+</div>
+
+
+
+
+<div class="content">
+
+
+<header>
+
+<h1>
+Dashboard
+</h1>
+
+
+<div>
+Sistema Maker
+</div>
+
+
+</header>
+
+
+
+<div class="cards">
+
+
+<div class="card">
+
+<h3>
+Projetos Ativos
+</h3>
+
+<span>
+0
+</span>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>
+Impressoras
+</h3>
+
+<span>
+0
+</span>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>
+Estoque
+</h3>
+
+<span>
+R$ 0
+</span>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>
+Lucro
+</h3>
+
+<span>
+R$ 0
+</span>
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+<div class="config">
+
+
+<h2>
+🎨 Personalização da Empresa
+</h2>
+
+
+<label>
+Nome da empresa
+</label>
+
+<input id="nomeInput"
+placeholder="Ex: Alpha 3D Studio">
+
+
+
+<label>
+Logo da empresa
+</label>
+
+<input 
+type="file"
+id="logoInput"
+accept="image/*">
+
+
+
+<label>
+Cor principal
+</label>
+
+<input 
+type="color"
+id="cor1"
+value="#6c5ce7">
+
+
+
+<label>
+Cor secundária
+</label>
+
+<input 
+type="color"
+id="cor2"
+value="#00cec9">
+
+
+
+<label>
+Tema
+</label>
+
+<select id="tema">
+
+<option value="dark">
+Escuro
+</option>
+
+<option value="light">
+Claro
+</option>
+
+</select>
+
+
+
+<button class="salvar"
+onclick="salvarConfig()">
+
+Salvar Configuração
+
+</button>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+<script>
+
+
+let dados =
+JSON.parse(localStorage.getItem("makerOS"))
+||
+{};
+
+
+
+function salvarConfig(){
+
+
+let nome =
+document.getElementById("nomeInput").value;
+
+
+let cor1 =
+document.getElementById("cor1").value;
+
+
+let cor2 =
+document.getElementById("cor2").value;
+
+
+
+dados.nome = nome;
+
+dados.cor1 = cor1;
+
+dados.cor2 = cor2;
+
+
+localStorage.setItem(
+"makerOS",
+JSON.stringify(dados)
+);
+
+
+
+aplicar();
+
+
+}
+
+
+
+function aplicar(){
+
+
+if(dados.nome){
+
+document.getElementById(
+"nomeEmpresa"
+).innerHTML=dados.nome;
+
+}
+
+
+
+if(dados.cor1){
+
+document.documentElement.style
+.setProperty(
+"--primary",
+dados.cor1
+);
+
+}
+
+
+
+if(dados.cor2){
+
+document.documentElement.style
+.setProperty(
+"--secondary",
+dados.cor2
+);
+
+}
+
+
+}
+
+
+
+document
+.getElementById("logoInput")
+.addEventListener(
+"change",
+function(e){
+
+
+let reader =
+new FileReader();
+
+
+reader.onload=function(){
+
+document
+.getElementById("logoEmpresa")
+.src =
+reader.result;
+
+
+dados.logo =
+reader.result;
+
+
+localStorage.setItem(
+"makerOS",
+JSON.stringify(dados)
+);
+
+
+}
+
+
+reader.readAsDataURL(
+e.target.files[0]
+);
+
+
+});
+
+
+
+aplicar();
+
+
+
+</script>
+
+
+</body>
+
+</html>
