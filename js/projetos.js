@@ -1,14 +1,14 @@
 /* =====================================
    MakkerBox 3D OS
 
-   PROJETOS 3D V3
+   PROJETOS V4
 
 ===================================== */
 
 
 
 // =====================================
-// ADICIONAR PROJETO
+// CADASTRAR PROJETO
 // =====================================
 
 
@@ -21,7 +21,10 @@ let projeto = {
 
 
 id:
+
 gerarID(),
+
+
 
 
 
@@ -33,11 +36,15 @@ document.getElementById(
 
 
 
+
+
 cliente:
 
 document.getElementById(
 "projetoCliente"
 ).value,
+
+
 
 
 
@@ -49,11 +56,15 @@ document.getElementById(
 
 
 
+
+
 impressora:
 
 document.getElementById(
 "projetoImpressora"
 ).value,
+
+
 
 
 
@@ -65,33 +76,47 @@ document.getElementById(
 
 
 
+
+
 peso:
 
 Number(
+
 document.getElementById(
 "projetoPeso"
 ).value
+
 ),
+
+
 
 
 
 tempo:
 
 Number(
+
 document.getElementById(
 "projetoTempo"
 ).value
+
 ),
+
+
 
 
 
 venda:
 
 Number(
+
 document.getElementById(
 "projetoVenda"
 ).value
+
 ),
+
+
 
 
 
@@ -99,11 +124,20 @@ status:
 
 document.getElementById(
 "projetoStatus"
-).value
+).value,
+
+
+
+
+
+finalizado:false
 
 
 
 };
+
+
+
 
 
 
@@ -115,15 +149,16 @@ document.getElementById(
 // ===============================
 
 
-let materialEncontrado =
+let material =
 
 banco.estoque.find(
 
-p =>
+m =>
 
-p.nome === projeto.material
+m.nome === projeto.material
 
 );
+
 
 
 
@@ -135,19 +170,23 @@ let custoMaterial = 0;
 
 
 
-if(materialEncontrado){
+if(material){
+
 
 
 custoMaterial =
 
+
 projeto.peso *
 
 Number(
-materialEncontrado.custoUnitario
+material.custoUnitario
 );
 
 
+
 }
+
 
 
 
@@ -160,16 +199,13 @@ materialEncontrado.custoUnitario
 // ===============================
 
 
-let impressoraEncontrada =
-
+let maquina =
 
 banco.impressoras.find(
-
 
 i =>
 
 i.modelo === projeto.impressora
-
 
 );
 
@@ -178,21 +214,22 @@ i.modelo === projeto.impressora
 
 
 
-let custoImpressao = 0;
+let custoMaquina = 0;
 
 
 
 
 
-if(impressoraEncontrada){
+
+if(maquina){
 
 
 
-custoImpressao =
+custoMaquina =
 
 
 Number(
-impressoraEncontrada.custoHora
+maquina.custoHora
 )
 
 *
@@ -209,9 +246,12 @@ projeto.tempo;
 
 
 
+
+
 // ===============================
-// CUSTOS FINAIS
+// CUSTO FINAL
 // ===============================
+
 
 
 projeto.custoMaterial =
@@ -220,9 +260,12 @@ custoMaterial.toFixed(2);
 
 
 
+
+
 projeto.custoImpressao =
 
-custoImpressao.toFixed(2);
+custoMaquina.toFixed(2);
+
 
 
 
@@ -237,7 +280,7 @@ custoMaterial
 
 +
 
-custoImpressao
+custoMaquina
 
 )
 
@@ -248,8 +291,8 @@ custoImpressao
 
 
 
-
 projeto.lucro =
+
 
 
 (
@@ -282,9 +325,11 @@ new Date()
 
 
 
+
 banco.projetos.push(
 projeto
 );
+
 
 
 
@@ -293,7 +338,13 @@ salvarBanco();
 
 
 
+
+
+
 mostrarProjetos();
+
+
+
 
 
 
@@ -301,13 +352,107 @@ atualizarDashboard();
 
 
 
+
+
+
 limparProjeto();
 
 
 
+}
+
+
+
+
+
+
+
+
+
+// =====================================
+// FINALIZAR PRODUÇÃO
+// =====================================
+
+
+function finalizarProjeto(id){
+
+
+
+let projeto =
+
+banco.projetos.find(
+
+p =>
+
+p.id === id
+
+);
+
+
+
+
+
+if(!projeto){
+
+return;
+
+}
+
+
+
+
+
+if(projeto.finalizado){
+
+return;
+
+}
+
+
+
+
+
+// baixa material
+
+
+consumirMaterial(
+
+projeto.material,
+
+projeto.peso,
+
+projeto.nome
+
+);
+
+
+
+
+
+projeto.finalizado = true;
+
+
+projeto.status =
+"📦 Entregue";
+
+
+
+
+
+
+salvarBanco();
+
+
+
+
+
+
+mostrarProjetos();
+
 
 
 }
+
 
 
 
@@ -333,6 +478,8 @@ document.getElementById(
 
 
 
+
+
 if(!lista){
 
 return;
@@ -350,7 +497,11 @@ lista.innerHTML="";
 
 
 
-banco.projetos.forEach(function(p){
+
+banco.projetos
+.forEach(function(p){
+
+
 
 
 
@@ -362,48 +513,75 @@ lista.innerHTML += `
 
 
 <h3>
+
 🧊 ${p.nome}
+
 </h3>
 
 
 
+
 <p>
+
 Cliente:
+
 ${p.cliente}
+
 </p>
 
 
 
+
 <p>
-🖨 ${p.impressora}
+
+🖨
+
+${p.impressora}
+
 </p>
 
 
 
+
 <p>
-📦 ${p.material}
+
+📦
+
+${p.material}
+
 </p>
 
 
 
+
 <p>
+
 Status:
+
 ${p.status}
+
 </p>
 
 
 
 
 <p>
+
 Custo:
+
 R$ ${p.custoTotal}
+
 </p>
 
 
 
+
 <p>
+
 Venda:
+
 R$ ${p.venda}
+
 </p>
 
 
@@ -412,9 +590,20 @@ R$ ${p.venda}
 <div class="valor">
 
 Lucro:
+
 R$ ${p.lucro}
 
 </div>
+
+
+
+
+
+<button onclick="finalizarProjeto(${p.id})">
+
+Finalizar produção
+
+</button>
 
 
 
@@ -440,8 +629,9 @@ R$ ${p.lucro}
 
 
 
+
 // =====================================
-// LIMPAR FORMULÁRIO
+// LIMPAR FORM
 // =====================================
 
 
@@ -449,7 +639,7 @@ function limparProjeto(){
 
 
 
-let campos = [
+let campos=[
 
 
 "projetoNome",
@@ -481,6 +671,8 @@ document.getElementById(id);
 
 
 
+
+
 if(campo){
 
 
@@ -488,6 +680,7 @@ campo.value="";
 
 
 }
+
 
 
 });
@@ -501,6 +694,8 @@ campo.value="";
 
 
 
+
+
 window.addEventListener(
 
 "load",
@@ -508,7 +703,9 @@ window.addEventListener(
 function(){
 
 
+
 mostrarProjetos();
+
 
 
 });
